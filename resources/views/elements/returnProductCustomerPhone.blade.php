@@ -70,8 +70,6 @@ $GLOBALS['CurrentUser']= auth()->user();
 
 
 
-
-
 <script>
     $(document).ready(function () {
 
@@ -259,6 +257,9 @@ $GLOBALS['CurrentUser']= auth()->user();
         $("#customerSuggession").hide();
         $("#customerSuggession").html("");
         customerFunction(id);
+
+
+        $("#customer_hidden_id").val(parseInt(id));
     }
 
 
@@ -272,12 +273,17 @@ $GLOBALS['CurrentUser']= auth()->user();
         var id = $(this).attr('data-item-id');
         var name = $(this).attr('data-item-name');
         $("#customer_input_id").val(id)
+   
         
         $("#customerSearchField").val(name)
         
         $("#customerSuggession").hide();
         $("#customerSuggession").html("");
+      
         customerFunction(id);
+
+        $("#customer_hidden_id").val(parseInt(id));
+        
     });
 
 

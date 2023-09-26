@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\calculationAnalysisDaily;
 use App\Models\calculationAnalysisMonthly;
 use App\Models\calculationAnalysisYearly;
+use App\Models\customer;
 use App\Models\Product;
 use App\Models\productAnalysisDaily;
 use App\Models\productAnalysisMonthly;
@@ -73,7 +74,8 @@ class ReturnFromCustomerController extends Controller
         $endTime = Carbon::now()->format('Y-m-d 23:59:59') ;
         $returnProducsts = returnFromCustomer::where('created_at','>=',$startTime  )->where('created_at','<=',$endTime  )->orderBy('id','desc')->get();
         $products = Product::all();
-        return view('product.return-product.customer.create',compact('products','returnProducsts','roles'));
+        $customers = customer::all();
+        return view('product.return-product.customer.create',compact('products','returnProducsts','roles','customers'));
     }
 
     /**
@@ -84,16 +86,22 @@ class ReturnFromCustomerController extends Controller
      */
     public function store(Request $request)
     {
+        
         $product = Product::find($request->product_id);
 
         $returnProduct = new returnFromCustomer;
         $returnProduct->user_id =Auth::user()->id;
         $returnProduct->product_id =$request->product_id ;
-        $returnProduct->customer_id =$request->return_product_customer_id ;
+        $returnProduct->customer_id =$request->customer_hidden_id ;
         $returnProduct->quantity =$request->quantity * $product->unit->value;
         $returnProduct->price =$request->price ;
         $returnProduct->comment =$request->comment ;
         $returnProduct->save();
+
+
+
+
+
         $cost = $product->cost_per_unit *  $returnProduct->quantity;
         $price_with_tax = $returnProduct->price ;
         $price = ($price_with_tax * 100) / (100 + $product->tax);
@@ -102,9 +110,10 @@ class ReturnFromCustomerController extends Controller
 
         $returnProduct->profit =     $cost - $price ;
 
-        $product->stock += $returnProduct->quantity;
+        $product->stock =  $product->stock +  $request->quantity;
         $returnProduct->save();
         $product->save();
+
 
         
          $this->onlineSync('returnFromCustomer','create',$returnProduct->id);

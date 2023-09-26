@@ -25,6 +25,14 @@
     @endif
 </div>
 @endif
+
+
+
+<style>
+    .selected {
+    background-color: #ebbe5c;
+}
+</style>
 <!-- Content Row -->
 <div class="container-fluid   p-0">
 
@@ -44,7 +52,7 @@
                     </nav>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('return-from-customers.store') }}">
+                    <form method="POST" action="{{ route('return-from-customers.store') }}" id="returnCustomerSubmitForm">
                         @csrf
                         <div class="form-row align-items-center">
 
@@ -85,11 +93,11 @@
                             </div>
 
 
-                            <input type="text" name="return_product_customer_id" id="return_product_customer_id" 
-                                    class="form-control " hidden>
+                            <input type="number" id="customer_hidden_id" name="customer_hidden_id" hidden>
+        
 
                             <div class="col-12 col-md-6  pt-4 ">
-                                <button type="submit" id="returnProductSubmit"
+                                <button type="button" id="returnProductSubmit"
                                     class="btn bg-abasas-dark">{{ __('translate.Submit')  }}</button>
                             </div>
 
@@ -113,7 +121,9 @@
         <!-- Left Sidebar Start -->
         <div class="col-xl-4 col-lg-4 col-md-4 order-1 order-md-2   ">
 
-            <x-customer-phone />
+           @include("elements.returnProductCustomerPhone",[
+            "customers" => $customers
+           ]);
 
         </div>
         <!-- supplier area End  -->
@@ -284,10 +294,16 @@
 <script>
 $(document).ready(function(){
 
-$(document).on('click','#returnProductSubmit',function(){
-    
-    var customer_id = $('#customer_input_id').val();
-    $('#return_product_customer_id').val(customer_id);
+$(document).on('click','#returnProductSubmit',function(e){
+    let customerIdFromInput = $('#customer_hidden_id').val();
+    if (customerIdFromInput == ''){
+        alert("please select the customer and try again");
+        return
+    }
+
+
+    $("#returnCustomerSubmitForm").submit();
+   
 })
 
 $('#dataTable1').DataTable({   

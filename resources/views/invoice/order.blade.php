@@ -144,11 +144,45 @@
               <td> {{ $singleProduct['name'] }}</td>
               <td>{{ $singleProduct['quantity'] }}</td>
               <td>{{ $singleProduct['price'] }}</td>
-              <td>{{ $singleProduct['discount'] }}</td>
+              <td>{{ $singleProduct['discount'] }} %</td>
               <td> {{ $singleProduct['total'] }} </td>
             </tr>
           
           @endforeach
+
+
+
+
+          
+          <tr style="border: none">
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"> <b> Total </b> </td>
+
+            @php
+              $totalAmountWithDiscount = intval($data['purchase']->total) + intval($data['purchase']->discount);
+            @endphp
+
+
+            <td style="border: none;"><b> {{ $totalAmountWithDiscount }}  </b> </td>
+          </tr>
+
+
+
+
+          <tr style="border: none">
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"> <b> Discount </b> </td>
+
+
+
+            <td style="border: none;"><b> {{ $data['purchase']->discount }}  </b> </td>
+          </tr>
 
 
 

@@ -56,6 +56,7 @@ $(document).ready(function () {
         $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
+        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
@@ -69,6 +70,7 @@ $(document).ready(function () {
         $("#productIdHidden").val(0);
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
+        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
@@ -95,6 +97,7 @@ $(document).ready(function () {
             $("#purchaseProductError").hide();
 
             $("#productIdHidden").val(product.id);
+            $('#purchaseProductInputPrice').removeAttr('disabled');
             $("#purchaseProductInputPrice").val(product.price_per_unit);
             $("#purchaseProductInputName").val(product.name);
         }
@@ -175,6 +178,31 @@ $(document).ready(function () {
         }
 
     });
+
+    //done
+    $("#purchaseProductInputPrice").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if( !($("#purchaseProductInputPrice").val() == '')  ){
+                $('#purchaseProductInputSellPrice').focus();
+            }
+        }
+
+    });
+
+
+    
+    //done
+    $("#purchaseProductInputSellPrice").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if( !($("#purchaseProductInputSellPrice").val() == '')  ){
+                $('#purchaseProductInputQuantity').focus();
+            }
+        }
+
+    });
+
+
+
     //done
     $("#purchaseProductInputQuantity").keypress(function (e) {
         if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
@@ -184,6 +212,9 @@ $(document).ready(function () {
         }
 
     });
+
+
+
 
 
 
@@ -207,6 +238,7 @@ $(document).ready(function () {
             html += '<td>' + purchaseTableData[row].id + '</td>'
             html += '<td>' + purchaseTableData[row].name + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].price).toFixed( 2 ) + '</td>'
+            html += '<td>' + parseFloat(purchaseTableData[row].sellPrice).toFixed( 2 ) + '</td>'
             html += '<td>' + purchaseTableData[row].quantity + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].discountValue).toFixed( 2 ) + '</td>'
             html += '<td>' +parseFloat( purchaseTableData[row].total).toFixed( 2 ) + '</td>'
@@ -256,6 +288,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
+            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -288,6 +321,7 @@ $(document).ready(function () {
             id: id,
             name: name,
             price: price,
+            sellPrice:sellPrice,
             quantity: parseFloat(purchaseTableData[id].quantity) + parseFloat(quantity),
             discountType: discountType,
             discount: discount,
@@ -313,6 +347,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
+            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -337,6 +372,7 @@ $(document).ready(function () {
                 id: id,
                 name: name,
                 price: price,
+                sellPrice:sellPrice,
                 quantity: parseFloat(quantity),
                 discountType: discountType,
                 discount: discount,
@@ -414,7 +450,6 @@ $(document).ready(function () {
     $("#purchaseProductInputId").keypress(function (e) {
         if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
 
-            console.log("enter is clicked");
             
             var product_id = parseInt($("#purchaseProductInputId").val().trim());
 
@@ -466,6 +501,7 @@ $(document).ready(function () {
         $("#productIdHidden").val(product.id);
         $("#purchaseProductInputName").val(product.name);
         $("#purchaseProductInputPrice").val(product.price);
+        $("#purchaseProductInputSellPrice").val(product.sellPrice);
         $("#purchaseProductInputdiscount").val(product.discount);
         $("#purchaseProductInputDiscountType").val(product.discountType);
         $("#purchaseProductInputDiscountValue").val(product.discountValue);
@@ -828,7 +864,8 @@ $(document).ready(function () {
                     
                     $('#pageloader').hide();
                     $("#orderCompleteButton").attr("disabled", false);
-                   alert(error.responseJSON.message);
+                     alert(error.responseJSON.message);
+                     console.log(error.responseJSON.message);
 
                 },
             });
@@ -857,9 +894,6 @@ $(document).ready(function () {
             if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13) {
                 return;
             }
-
-
-
 
             $("#productSuggession").show();
 
@@ -930,7 +964,7 @@ $(document).ready(function () {
                 selectHighlightedItem();
 
 
-                $('#purchaseProductInputQuantity').focus();
+                $('#purchaseProductInputSellPrice').focus();
                 
              
             }

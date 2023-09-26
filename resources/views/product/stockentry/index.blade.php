@@ -74,10 +74,22 @@
                         </div>
                         <div class="col-auto">
 
-                            <span class="text-dark pl-1"> {{ __('translate.Unit Price') }} </span>
+                            <span class="text-dark pl-1"> {{ __('translate.Purchase Price') }} </span>
                             <input type="number" step="any" name="price" id="purchaseProductInputPrice" size="6"  min="0"
                                 class="form-control  mb-2  inputMinZero" disabled>
                         </div>
+
+
+                        
+                                             
+                        <div class="col-auto">
+
+                            <span class="text-dark pl-1"> {{ __('translate.Sell Price') }} </span>
+                            <input type="number" step="any" name="sell_price" id="purchaseProductInputSellPrice" size="6"  min="0"
+                                class="form-control  mb-2  inputMinZero" >
+                        </div>
+
+
 
                         <div class="col-auto">
 
@@ -153,7 +165,8 @@
                                 <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
-                                <th>{{ __("translate.Price") }} </th>
+                                <th>{{ __("translate.Purchase Price") }} </th>
+                                <th>{{ __("translate.Sell Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>
@@ -167,7 +180,8 @@
                                 <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
-                                <th>{{ __("translate.Price") }} </th>
+                                <th>{{ __("translate.Purchase Price") }} </th>
+                                <th>{{ __("translate.Sell Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>
@@ -267,7 +281,7 @@
 
                     <div class="row mb-2">
                         <div class="col-12 @can('Allow Supplier Due') col-md-6 @endcan pt-1 pb-1 border-dark bg-dark border-dotted ">
-                            <div class="text-center h5 "> {{ __("translate.Total limit") }}</div>
+                            <div class="text-center h5 "> {{ __("translate.Total") }}</div>
                             <input type="text" name="" id="totalWithOutDue" value=0 class="inputMinZero" hidden>
                             <div class="text-center h5 text-success " id="finalTotal">0</div>
                             <input type="number" id="current_total_hidden_input" value="1" step="0.01" hidden>

@@ -18,6 +18,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->unsignedBigInteger('purchase_id');
             $table->unsignedBigInteger('product_id');
             $table->double('price',18,2)->default(0);
+            $table->double('sell_price',18,2)->default(0);
             $table->double('quantity',18,6)->default(1);
             $table->double('discount',18,2)->default(0);
             $table->double('total',18,2)->default(0);

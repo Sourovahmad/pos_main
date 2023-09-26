@@ -198,6 +198,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                         $("#purchaseProductInputId").val(value.product_id);
                         $("#purchaseProductInputName").val(value.product.name);
                         $("#purchaseProductInputPrice").val(value.price);
+                        $("#purchaseProductInputSellPrice").val(value.sell_price);
                         $("#purchaseProductInputdiscount").val(value.discount);
                         $("#purchaseProductInputQuantity").val(value.quantity);
                         $("#purchaseProductInputTotal").val(value.total);

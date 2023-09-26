@@ -144,6 +144,7 @@ class PurchaseController extends Controller
             $purchaseDetail->purchase_id = $purchase->id;
             $purchaseDetail->product_id = $product['id'];
             $purchaseDetail->price = $product['price'];
+            $purchaseDetail->sell_price = $product['sellPrice'];
             $purchaseDetail->quantity = $product['quantity'];
             $purchaseDetail->discount = $product['discount'];
             $purchaseDetail->total = $product['total'];

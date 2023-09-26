@@ -58,6 +58,7 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
+        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
     }
@@ -71,6 +72,7 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
+        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
         $("#purchaseProductError").show();
@@ -136,6 +138,18 @@ $(document).ready(function () {
     $("#purchaseProductInputPrice").keypress(function (e) {
         if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
             if( !($("#purchaseProductInputPrice").val() == '')  ){
+                $('#purchaseProductInputSellPrice').focus();
+            }
+        }
+
+    });
+
+
+    
+    //done
+    $("#purchaseProductInputSellPrice").keypress(function (e) {
+        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
+            if( !($("#purchaseProductInputSellPrice").val() == '')  ){
                 $('#purchaseProductInputQuantity').focus();
             }
         }
@@ -207,6 +221,7 @@ $(document).ready(function () {
             html += '<td>' + purchaseTableData[row].id + '</td>'
             html += '<td>' + purchaseTableData[row].name + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].price).toFixed( 2 ) + '</td>'
+            html += '<td>' + parseFloat(purchaseTableData[row].sellPrice).toFixed( 2 ) + '</td>'
             html += '<td>' + purchaseTableData[row].quantity + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].discountValue).toFixed( 2 ) + '</td>'
             html += '<td>' +parseFloat( purchaseTableData[row].total).toFixed( 2 ) + '</td>'
@@ -236,6 +251,7 @@ $(document).ready(function () {
         purchaseTableData[id] = {
             id: id,
             name: 'name',
+            sellPrice:0,
             price: 0,
             quantity: 0,
             discountType: 0,
@@ -256,6 +272,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
+            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -288,6 +305,7 @@ $(document).ready(function () {
             id: id,
             name: name,
             price: price,
+            sellPrice:sellPrice,
             quantity: parseFloat(purchaseTableData[id].quantity) + parseFloat(quantity),
             discountType: discountType,
             discount: discount,
@@ -313,6 +331,7 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
+            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -350,6 +369,7 @@ $(document).ready(function () {
             id: id,
             name: name,
             price: price,
+            sellPrice:sellPrice,
             quantity: parseFloat(quantity),
             discountType: discountType,
             discount: discount,
@@ -444,7 +464,6 @@ $(document).ready(function () {
     //done
     $("body").on("click", "#purchaseProductTableEdit", function () {
         var prooductId = $(this).attr('productId');
-        console.log("Clicked On update button " + prooductId);
         $("#purchaseProductInputSubmit").data("submit-type", 'update');
         $("#purchaseProductInputSubmit").data("item-id", prooductId);
         $("#purchaseProductInputSubmit").attr("disabled", false);
@@ -456,6 +475,7 @@ $(document).ready(function () {
         $("#productIdHidden").val(product.id);
         $("#purchaseProductInputName").val(product.name);
         $("#purchaseProductInputPrice").val(product.price);
+        $("#purchaseProductInputSellPrice").val(product.sellPrice);
         $("#purchaseProductInputdiscount").val(product.discount);
         $("#purchaseProductInputDiscountType").val(product.discountType);
         $("#purchaseProductInputDiscountValue").val(product.discountValue);

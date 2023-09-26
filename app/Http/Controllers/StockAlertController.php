@@ -152,7 +152,7 @@ class StockAlertController extends Controller
             
                 $message = "Total amount cannot be more than " . $purchase->total;
                 return response()->json([
-                    "messsage" => $message,
+                    "message" => $message,
                 ],400);
 
 
@@ -167,6 +167,7 @@ class StockAlertController extends Controller
                     $dbProduct = Product::find($singleProduct['id']);
                     $dbProduct->cost_per_unit = ($dbProduct->cost_per_unit + floatval($singleProduct['price'])) / 2; // giving an average price
                     $dbProduct->stock = $dbProduct->stock + intval($singleProduct['quantity']);
+                    $dbProduct->price_per_unit = $singleProduct['sellPrice'];
                     $dbProduct->save();
 
                     $purchaseTotalLimit = $purchaseTotalLimit - floatval($singleProduct['total']);

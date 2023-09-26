@@ -76,8 +76,6 @@ $GLOBALS['CurrentUser']= auth()->user();
     $(document).ready(function () {
 
         function viewCustomerData(customer) {
-            console.log(customer);
-            console.log('customer');
 
             $("#customerPhoneAreaForm").hide();
            // $("#customer_input_id").val(customer.id); //no need
@@ -112,8 +110,6 @@ $GLOBALS['CurrentUser']= auth()->user();
 
         function customerFunction(id) {
             var link = "{{ route('home') }}/api/customer-find?id=" +id;
-            console.log(link);
-
             $.get(link, function (customer, status) {
                 viewCustomerData(customer);
             });
@@ -125,6 +121,12 @@ $GLOBALS['CurrentUser']= auth()->user();
     //                               *****************************************************************************
     //                                           ##########  Add Customer Section    #############
     //                               *******************************************************************************
+
+
+    var databaseCustomer = @json($customers);
+    
+
+
 
         $(document).on('click','#NewCustomerButton',function(){
             $("#customerPhoneAreaForm").toggle();
@@ -143,7 +145,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                 return ;
             }
             var OPfrm = $('#customerPhoneAreaForm');
-            var act = OPfrm.attr('action');            console.log("---------- action " + act);
+            var act = OPfrm.attr('action');   
          
             $.ajax({
                 type: OPfrm.attr('method'),
@@ -153,6 +155,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                     $("#customer_id").val(customer.id);
                     $("#customer_input_id").val(customer.id);
                     $("#customerSearchField").val(customer.name);
+                    databaseCustomer.push(customer);
                     viewCustomerData(customer);
                 },
                 error: function (data) {
@@ -169,8 +172,7 @@ $GLOBALS['CurrentUser']= auth()->user();
     //                                           ##########  Search Customer suggession    #############
     //                               *******************************************************************************
 
-    var databaseCustomer = @json($customers);
-    
+
     $("#customerSuggession").hide();
     $("#customerSearchField").on('keyup', function () {
         $("#customerSuggession").show();

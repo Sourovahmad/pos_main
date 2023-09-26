@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sourov Heart Foundation (purchase Order)</title>
+  <title> Digital Technology (purchase Order)</title>
   <style>
     .receipt {
     width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 2px solid #aaa; /* Adds a border for attractiveness */
+    /*border: 2px solid #aaa; /* Adds a border for attractiveness */
     border-radius: 10px;    /* Rounded corners */
   }
   
@@ -18,11 +18,13 @@
   
   .header {
     text-align: center;
-    padding-top: 30px; /* Space for the logo */
+    padding-top: 15px; /* Space for the logo */
+    line-height:5px;
   }
   
   .purchase-order-title {
     text-align: center;
+    margin-top: 40px;
   }
   
   .body {
@@ -59,7 +61,11 @@
   }
   
   /* Make it look more attractive */
-  .order-2 p {
+  .order-to {
+    text-align: left;
+    line-height:15px;
+  }
+  .order-to p {
     font-weight: bold;
     color: #444;
   }
@@ -104,12 +110,14 @@
 </head>
 <body>
   <div class="receipt">
+    <div class="logo"><img src="image/logo.png" height="50px" alt="Logo"></div>
     <div class="header">
-      <h4>সৌরভ হাসপাতাল সিলেট</h4>
-      <h2>SOUROV HEART FOUNDATION HOSPITAL SYLHET</h2>
-      <p>East Shahi Eidgah, Sylhet, Bangladesh</p>
-      <p> Mobile: 01729-867026</p>
+      <h2>Digital Technology BD</h2>
+      <span>Computer sales & Servicing solution provider</span>
+      <p>Dishari-106, Hawapara, Sylhet</p>
+      <p> Mobile: 01891-471677</p>    
     </div>
+
     <div class="body">
         <h2 class="purchase-order-title">Purchase Order</h2>
         <div class="order-details">
@@ -117,7 +125,8 @@
             <h3>Order To:</h3>
             <p>{{ $data['purchase']->supplier->name }}</p>
             <p>{{ $data['purchase']->supplier->company }}</p>
-            <p>{{ $data['purchase']->supplier->address }}</p>
+            <span>{{ $data['purchase']->supplier->address }}</span>
+       
           </div>
           <div class="order-info">
             <p>Order id: {{ $data['purchase_order_id']}} </p>
@@ -128,7 +137,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th>S.I</th>
+            <th>SI.No</th>
             <th>ProductName</th>
             <th>Quantity</th>
             <th>Rate</th>
@@ -144,7 +153,7 @@
               <td> {{ $singleProduct['name'] }}</td>
               <td>{{ $singleProduct['quantity'] }}</td>
               <td>{{ $singleProduct['price'] }}</td>
-              <td>{{ $singleProduct['discount'] }}</td>
+              <td>{{ $singleProduct['discount'] }}%</td>
               <td> {{ $singleProduct['total'] }} </td>
             </tr>
           
@@ -152,6 +161,40 @@
 
 
        
+
+
+          {{--  total Table row --}}
+          <tr style="border: none">
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"> <b> Total </b> </td>
+
+            @php
+              $totalAmountWithDiscount = intval($data['purchase']->total) + intval($data['purchase']->discount);
+            @endphp
+
+            <td style="border: none;"><b> {{ $totalAmountWithDiscount }}  </b> </td>
+
+
+            
+          </tr>
+
+
+          <tr style="border: none">
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"></td>
+            <td style="border: none;"> <b> Discount </b> </td>
+
+
+
+            <td style="border: none;"><b> {{ $data['purchase']->discount }}  </b> </td>
+          </tr>
+
+
 
 
           {{--  total Table row --}}
@@ -163,11 +206,9 @@
             <td style="border: none;"></td>
             <td style="border: none;"> <b>Grand Total </b> </td>
             <td style="border: none;"><b> {{ $data['purchase']->total }}  </b> </td>
-
-
           </tr>
 
-          
+
           <tr style="border: none">
             <td style="border: none;"></td>
             <td style="border: none;"></td>
@@ -178,6 +219,7 @@
 
 
           </tr>
+
 
 
          
@@ -209,9 +251,7 @@
       </div>
 
       <div class="ourwebistInfo"> 
-        <p style="font-size:12px">Developed by </p>
-        <p style="font-size:12px">easy Solution (+8801729867026)</p>
-
+        <p style="font-size:12px; text-align: center;">Developed by: AS Coroporation (+8801723500532, +8801729867026) </p>
       </div>
      
     </div>

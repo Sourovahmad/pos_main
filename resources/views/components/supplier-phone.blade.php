@@ -112,7 +112,6 @@ $GLOBALS['CurrentUser']= auth()->user();
 
         function supplierFunction(id) {
             var link = "{{ route('home') }}/api/supplier-find?id=" +id;
-            console.log(link);
 
             $.get(link, function (supplier, status) {
                 viewSupplierData(supplier);
@@ -125,6 +124,9 @@ $GLOBALS['CurrentUser']= auth()->user();
     //                               *****************************************************************************
     //                                           ##########  Add Supplier Section    #############
     //                               *******************************************************************************
+
+
+    var databaseSupplier = @json($suppliers);
 
         $(document).on('click','#NewSupplierButton',function(){
             $("#supplierPhoneAreaForm").toggle();
@@ -143,7 +145,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                 return ;
             }
             var OPfrm = $('#supplierPhoneAreaForm');
-            var act = OPfrm.attr('action');            console.log("---------- action " + act);
+            var act = OPfrm.attr('action');
          
             $.ajax({
                 type: OPfrm.attr('method'),
@@ -152,6 +154,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                 success: function (supplier) {
                     $("#supplier_id").val(supplier.id);
                     $("#supplierSearchField").val(supplier.name);
+                    databaseSupplier.push(supplier);
                     viewSupplierData(supplier);
                 },
                 error: function (data) {
@@ -168,7 +171,7 @@ $GLOBALS['CurrentUser']= auth()->user();
     //                                           ##########  Search Supplier suggession    #############
     //                               *******************************************************************************
 
-    var databaseSupplier = @json($suppliers);
+
     
     $("#supplierSuggession").hide();
     $("#supplierSearchField").on('keyup', function () {

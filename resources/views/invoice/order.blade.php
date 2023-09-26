@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sourov Heart Foundation (invoice)</title>
+  <title>     Digital Technology BD  (invoice)</title>
   <style>
     .receipt {
     width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 2px solid #aaa; /* Adds a border for attractiveness */
-    border-radius: 10px;    /* Rounded corners */
+    /* border: 2px solid #aaa; /* Adds a border for attractiveness */
+    /*border-radius: 10px;    /* Rounded corners */
   }
   
   .logo {
@@ -18,11 +18,14 @@
   
   .header {
     text-align: center;
-    padding-top: 30px; /* Space for the logo */
+    padding-top: 15px; /* Space for the logo */
+    line-height:5px;
   }
   
   .purchase-order-title {
+    margin-top: 40px;
     text-align: center;
+
   }
   
   .body {
@@ -48,8 +51,8 @@
   .order-details {
     text-align: center;
     background-color: #f2f2f2; /* Light gray background for details */
-    padding: 10px;
-    margin-bottom: 20px; /* Space between details and table */
+    padding: 0px;
+    margin-bottom: 10px; /* Space between details and table */
   }
   
   .approval-section {
@@ -59,6 +62,10 @@
   }
   
   /* Make it look more attractive */
+  .order-to {
+    text-align: left;
+    line-height:5px;
+  }
   .order-2 p {
     font-weight: bold;
     color: #444;
@@ -68,14 +75,7 @@
     font-family: Arial, sans-serif; /* Use a basic, readable font */
   }
   
-  h1, h2 {
-    color: #333; /* Darker color for headers */
-  }
-  
-  p {
-    color: #555; /* Slightly lighter color for text */
-  }
-  
+
   .table th {
     background-color: #ddd; /* Light gray background for header row */
   }
@@ -85,11 +85,11 @@
     display: flex;
     justify-content: space-between;
     align-items: start;
-    background-color: #f2f2f2; /* Light gray background for details */
-    padding: 10px;
-    margin-bottom: 20px; /* Space between details and table */
-    border: 1px solid #aaa; /* Adds a border for attractiveness */
-    border-radius: 5px;    /* Rounded corners */
+  /*  background-color: #f2f2f2; /* Light gray background for details */
+    padding: 0px;
+    margin-bottom: 5px; /* Space between details and table */
+   /* border: 1px solid #aaa; /* Adds a border for attractiveness */
+    /* border-radius: 5px;    /* Rounded corners */
   }
   
   .order-to h3, .order-info h3 {
@@ -104,34 +104,36 @@
 </head>
 <body>
   <div class="receipt">
+  <div class="logo"><img src="image/logo.png" height="50px" alt="Logo"></div>
     <div class="header">
-      <h4>সৌরভ হাসপাতাল সিলেট</h4>
-      <h2>SOUROV HEART FOUNDATION HOSPITAL SYLHET</h2>
-      <p>East Shahi Eidgah, Sylhet, Bangladesh</p>
-      <p> Mobile: 01729-867026</p>
+      <h2>Digital Technology BD</h2>
+      <span>Computer sales & Servicing solution provider</span>
+      <p>Dishari-106, Hawapara, Sylhet</p>
+      <p> Mobile: 01891-471677</p>    
     </div>
     <div class="body">
-        <h2 class="purchase-order-title">Invoice</h2>
+        <h2 class="purchase-order-title"> <u>BILL</u></h2>
         <div class="order-details">
           <div class="order-to">
-            <h3>Order To:</h3>
-            <p>{{ $data['purchase']->customer->name }}</p>
-            <p>{{ $data['purchase']->customer->company }}</p>
-            <p>{{ $data['purchase']->customer->address }}</p>
+             <!-- <h3>Order To:</h3> --->
+             <p><b>Invoice No: {{ $data['purchase']->id }} </b></p>
+            <p>Sold To:{{ $data['purchase']->customer->name }}</p>
+            <p>Address:{{ $data['purchase']->customer->address }}</p>
+            <!---<p>Company name:{{ $data['purchase']->customer->company }}</p> --->
+            <p>Mobile:{{ $data['purchase']->customer->phone }}</p>
+                   
           </div>
           <div class="order-info">
-            <p>Order Number: {{ $data['purchase']->id }} </p>
-            <p>Order Date: {{ now()->format('Y-m-d') }}</p>
-            <p>Prepared By: {{ auth()->user()->name }}</p>
+            <p>Date: {{ now()->format('d-m-Y') }}</p>
           </div>
         </div>
       <table class="table">
         <thead>
           <tr>
             <th>S.I</th>
-            <th>ProductName</th>
+            <th>Items & Specification</th>
             <th>Quantity</th>
-            <th>Rate</th>
+            <th>Unite Price</th>
             <th>Discount</th>
             <th>Total</th>
           </tr>
@@ -144,7 +146,7 @@
               <td> {{ $singleProduct['name'] }}</td>
               <td>{{ $singleProduct['quantity'] }}</td>
               <td>{{ $singleProduct['price'] }}</td>
-              <td>{{ $singleProduct['discount'] }} %</td>
+              <td>{{ $singleProduct['discount'] }}%</td>
               <td> {{ $singleProduct['total'] }} </td>
             </tr>
           
@@ -153,7 +155,7 @@
 
 
 
-          
+          {{--  total Table row --}}
           <tr style="border: none">
             <td style="border: none;"></td>
             <td style="border: none;"></td>
@@ -210,14 +212,12 @@
 
           </tr>
 
-         
-
 
         </tbody>
       </table>
 
       <div class="in-word-text">
-        <b>In Word :  {{ $data['totalNumberInWord'] }} taka only</b>
+        <b>In Word :  {{ $data['totalNumberInWord'] }} taka only (Excluding Vat & Tex)</b>
       </div>
 
 
@@ -239,8 +239,7 @@
       </div>
 
       <div class="ourwebistInfo"> 
-        <p style="font-size:12px">Developed by </p>
-        <p style="font-size:12px">easy Solution (+8801729867026)</p>
+        <p style="font-size:12px; text-align: center;">Developed by: AS Coroporation (+8801723500532, +8801729867026) </p>
 
       </div>
      

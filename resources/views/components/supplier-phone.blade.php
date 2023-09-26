@@ -174,7 +174,13 @@ $GLOBALS['CurrentUser']= auth()->user();
 
     
     $("#supplierSuggession").hide();
-    $("#supplierSearchField").on('keyup', function () {
+    let selectedIndex = -1;
+    $("#supplierSearchField").on('keyup', function (e) {
+
+        if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13) {
+                return;
+            }
+
         $("#supplierSuggession").show();
         $("#supplierPhoneAreaForm").hide();
         $("#supplierPhoneArea").hide();
@@ -196,10 +202,11 @@ $GLOBALS['CurrentUser']= auth()->user();
                 if (count == 50) {
                     return false;
                 }
-                count++;
                 $('#supplierSuggession').append(
                     '<a herf="#" class="list-group-item list-group-item-action border-1 searchSupplier text-dark" data-item-id="' +
-                    value.id + '"data-item-name="' + value.name + '">' + value.name + ' | ' + value.phone + ' </a>')
+                    value.id + ' "data-index="'+count+'"data-item-name="' + value.name + '">' + value.name + ' | ' + value.phone + ' </a>'
+                )
+                    count++;
             }
 
         });
@@ -211,7 +218,52 @@ $GLOBALS['CurrentUser']= auth()->user();
 
 
 
-    });
+    })
+    .on("keydown", function (e) {
+            var count = $("#supplierSuggession a.searchSupplier").length;
+            if (e.keyCode == 40) {
+                // Down arrow
+                if (selectedIndex < count - 1) {
+                    selectedIndex++;
+                    highlightSelection();
+                }
+            } else if (e.keyCode == 38) {
+                // Up arrow
+                if (selectedIndex > 0) {
+                    selectedIndex--;
+                    highlightSelection();
+                }
+            } else if (e.keyCode == 13) {
+                e.preventDefault();
+                selectHighlightedItem();
+                $('#purchaseProductInputId').focus();
+                
+             
+            }
+        });
+
+        function highlightSelection() {
+            $(".searchSupplier").removeClass("selected");
+            $('.searchSupplier[data-index="' + selectedIndex + '"]').addClass("selected");
+        }
+ 
+
+    function selectHighlightedItem() {
+        var id = $(".searchSupplier.selected").attr("data-item-id");
+        var name = $(".searchSupplier.selected").attr('data-item-name');
+        $("#supplier_input_id").val(id)
+        $("#supplierSearchField").val(name)
+        
+        $("#supplierSuggession").hide();
+        $("#supplierSuggession").html("");
+        supplierFunction(id);
+    }
+
+
+
+
+
+
 
     
     $('body').click(function () {

@@ -429,7 +429,6 @@ $(document).ready(function () {
             var product_id = parseInt($("#purchaseProductInputId").val().trim());
 
             if ( !(typeof databaseProducts[product_id] == 'undefined')) {
-                console.log("enter is clicked")
                 $("#productSuggession").html("");
                 $("#productSuggession").hide();
                 // purchaseInputSubmitFunction();

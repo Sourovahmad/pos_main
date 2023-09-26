@@ -6,10 +6,9 @@
 
 @section('content')
 
-
 <style>
     .selected {
-    background-color: #f0f0f0;
+    background-color: #ebbe5c;
 }
 </style>
 

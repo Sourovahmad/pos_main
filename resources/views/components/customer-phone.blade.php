@@ -174,7 +174,13 @@ $GLOBALS['CurrentUser']= auth()->user();
 
 
     $("#customerSuggession").hide();
-    $("#customerSearchField").on('keyup', function () {
+    let selectedIndex = -1;
+    $("#customerSearchField").on('keyup', function (e) {
+
+        if (e.keyCode == 40 || e.keyCode == 38 || e.keyCode == 13) {
+                return;
+            }
+
         $("#customerSuggession").show();
         $("#customerPhoneAreaForm").hide();
         $("#customerPhoneArea").hide();
@@ -196,10 +202,13 @@ $GLOBALS['CurrentUser']= auth()->user();
                 if (count == 50) {
                     return false;
                 }
-                count++;
+            
                 $('#customerSuggession').append(
                     '<a herf="#" class="list-group-item list-group-item-action border-1 searchCustomer text-dark" data-item-id="' +
-                    value.id + '"data-item-name="' + value.name + '">' + value.name + ' | ' + value.phone + ' </a>')
+                    value.id +' "data-index="'+count+'"data-item-name="' + value.name + '">' + value.name + ' | ' + value.phone + ' </a>'
+                    
+                )
+                count++;
             }
 
         });
@@ -209,9 +218,49 @@ $GLOBALS['CurrentUser']= auth()->user();
             )
         }
 
+        selectedIndex = -1;
 
+    })
+    .on("keydown", function (e) {
+            var count = $("#customerSuggession a.searchCustomer").length;
+            if (e.keyCode == 40) {
+                // Down arrow
+                if (selectedIndex < count - 1) {
+                    selectedIndex++;
+                    highlightSelection();
+                }
+            } else if (e.keyCode == 38) {
+                // Up arrow
+                if (selectedIndex > 0) {
+                    selectedIndex--;
+                    highlightSelection();
+                }
+            } else if (e.keyCode == 13) {
+                e.preventDefault();
+                selectHighlightedItem();
+                $('#purchaseProductInputId').focus();
+                
+             
+            }
+        });
 
-    });
+        function highlightSelection() {
+            $(".searchCustomer").removeClass("selected");
+            $('.searchCustomer[data-index="' + selectedIndex + '"]').addClass("selected");
+        }
+ 
+
+    function selectHighlightedItem() {
+        var id = $(".searchCustomer.selected").attr("data-item-id");
+        var name = $(".searchCustomer.selected").attr('data-item-name');
+        $("#customer_input_id").val(id)
+        $("#customerSearchField").val(name)
+        
+        $("#customerSuggession").hide();
+        $("#customerSuggession").html("");
+        customerFunction(id);
+    }
+
 
     
     $('body').click(function () {

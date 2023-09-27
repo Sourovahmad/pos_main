@@ -155,6 +155,8 @@ $GLOBALS['CurrentUser']= auth()->user();
                     $("#customer_id").val(customer.id);
                     $("#customer_input_id").val(customer.id);
                     $("#customerSearchField").val(customer.name);
+                    $("#customer_input_id").val(parseInt(customer.id))
+
                     databaseCustomer.push(customer);
                     viewCustomerData(customer);
                 },

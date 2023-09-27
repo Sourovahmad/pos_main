@@ -756,8 +756,7 @@ $(document).ready(function () {
 
 
             let supplierUserId =  $('#supplier_input_id').val();
-            console.log(supplierUserId);
-
+ 
           
             if (supplierUserId == ''){
                 $('#supplierSearchField').focus();

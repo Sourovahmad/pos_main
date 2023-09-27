@@ -48,87 +48,7 @@
           
             <div class="row">
     
-              {{-- for here --}}
-           
-                 <!--Today order  Card Example -->
-       
-                 <div class="col-3 mb-4 text-center vtopCard">
-              <div class="card  m-0 p-0 border border-dark">
-               
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col ">
-                      {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                  @php
-                     $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                  @endphp
-
-
-                 <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_CODE_32 )) }}">
-                         
-                     
-                        @php 
-                           $price = $product->price_per_unit * $product->unit->value ;
-                         @endphp
-
-
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                      @if ($print_price == 1)
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                          
-                      @endif
-                      
-                    
-                    </div>
-    
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-    
-                   {{-- // end for here --}}
-
-
-
-
-
-                   <div class="col-3 mb-4 text-center vtopCard">
-                    <div class="card  m-0 p-0 border border-dark">
-                     
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                        @php
-                           $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                        @endphp
-      
-      
-                       <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_CODE_39 )) }}">
-                               
-                           
-                              @php 
-                                 $price = $product->price_per_unit * $product->unit->value ;
-                               @endphp
-      
-      
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                            @if ($print_price == 1)
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                                
-                            @endif
-                            
-                          
-                          </div>
-          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
+              @for($i=0 ; $i< $amount ; $i++)
 
                   <div class="col-3 mb-4 text-center vtopCard">
                     <div class="card  m-0 p-0 border border-dark">
@@ -136,46 +56,7 @@
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
                           <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                        @php
-                           $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                        @endphp
-      
-      
-                       <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_CODE_39_CHECKSUM )) }}">
-                               
-                           
-                              @php 
-                                 $price = $product->price_per_unit * $product->unit->value ;
-                               @endphp
-      
-      
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                            @if ($print_price == 1)
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                                
-                            @endif
-                            
-                          
-                          </div>
-          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-    
-
-                  <div class="col-3 mb-4 text-center vtopCard">
-                    <div class="card  m-0 p-0 border border-dark">
-                     
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div>
                         @php
                            $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
                         @endphp
@@ -201,168 +82,15 @@
                         </div>
                       </div>
                     </div>
+
+
+
+
+
                   </div>
 
-
-
-
-
+                  @endfor
                   
-
-                  <div class="col-3 mb-4 text-center vtopCard">
-                    <div class="card  m-0 p-0 border border-dark">
-                     
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                        @php
-                           $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                        @endphp
-      
-      
-                       <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_STANDARD_2_5_CHECKSUM )) }}">
-                               
-                           
-                              @php 
-                                 $price = $product->price_per_unit * $product->unit->value ;
-                               @endphp
-      
-      
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                            @if ($print_price == 1)
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                                
-                            @endif
-                            
-                          
-                          </div>
-          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-    
-    
-                  
-
-                  <div class="col-3 mb-4 text-center vtopCard">
-                    <div class="card  m-0 p-0 border border-dark">
-                     
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                        @php
-                           $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                        @endphp
-      
-      
-                       <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_RMS4CC )) }}">
-                               
-                           
-                              @php 
-                                 $price = $product->price_per_unit * $product->unit->value ;
-                               @endphp
-      
-      
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                            @if ($print_price == 1)
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                                
-                            @endif
-                            
-                          
-                          </div>
-          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-
-    
-                <div class="col-3 mb-4 text-center vtopCard">
-                    <div class="card  m-0 p-0 border border-dark">
-                     
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col ">
-                            {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                        @php
-                           $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                        @endphp
-      
-      
-                       <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_PHARMA_CODE )) }}">
-                               
-                           
-                              @php 
-                                 $price = $product->price_per_unit * $product->unit->value ;
-                               @endphp
-      
-      
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                            @if ($print_price == 1)
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                                
-                            @endif
-                            
-                          
-                          </div>
-          
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-
-
-                      
-                <div class="col-3 mb-4 text-center vtopCard">
-                  <div class="card  m-0 p-0 border border-dark">
-                   
-                    <div class="card-body">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col ">
-                          {{-- <div class="text-xs font-weight-bold text-primary text-uppercase mb-1   " style="font-size: 130%;"  >{{$product->name}}</div> --}}
-                      @php
-                         $generator = new Picqer\Barcode\BarcodeGeneratorPNG()
-                      @endphp
-    
-    
-                     <img src="data:image/png;base64,{{ base64_encode($generator->getBarcode($product->id, $generator::TYPE_PHARMA_CODE_TWO_TRACKS )) }}">
-                             
-                         
-                            @php 
-                               $price = $product->price_per_unit * $product->unit->value ;
-                             @endphp
-    
-    
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 100%;" >{{$product->id}}</div>
-                          @if ($print_price == 1)
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="font-size: 115%;"> Price(+ {{$product->tax}}% vat) :@if($product->tax_type_id ==2) {{ $price }} @else  {{ $price + $price * $product->tax /100  }} @endif </div>
-                              
-                          @endif
-                          
-                        
-                        </div>
-        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-
-
-
     
             </div>
                         

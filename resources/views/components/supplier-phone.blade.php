@@ -155,6 +155,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                     $("#supplier_id").val(supplier.id);
                     $("#supplierSearchField").val(supplier.name);
                     databaseSupplier.push(supplier);
+                    $("#supplier_input_id").val(parseInt(supplier.id))
                     viewSupplierData(supplier);
                 },
                 error: function (data) {

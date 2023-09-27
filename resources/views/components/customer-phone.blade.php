@@ -253,7 +253,7 @@ $GLOBALS['CurrentUser']= auth()->user();
     function selectHighlightedItem() {
         var id = $(".searchCustomer.selected").attr("data-item-id");
         var name = $(".searchCustomer.selected").attr('data-item-name');
-        $("#customer_input_id").val(id)
+        $("#customer_input_id").val(parseInt(id))
         $("#customerSearchField").val(name)
         
         $("#customerSuggession").hide();
@@ -271,7 +271,7 @@ $GLOBALS['CurrentUser']= auth()->user();
     $(document).on('click', '.searchCustomer', function () {
         var id = $(this).attr('data-item-id');
         var name = $(this).attr('data-item-name');
-        $("#customer_input_id").val(id)
+        $("#customer_input_id").val(parseInt(id))
         
         $("#customerSearchField").val(name)
         

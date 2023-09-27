@@ -146,7 +146,9 @@ class OrderController extends Controller
             $profit += $product['profit'];
             $productCount += $orderDetail->quantity;
              $orderDetail->save();
-            $databaseProduct->stock -= $orderDetail->quantity;
+
+
+            $databaseProduct->stock = $databaseProduct->stock - $product['quantity'];
             if( $databaseProduct->stock <0){
                 $databaseProduct->stock =0;
             }

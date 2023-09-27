@@ -85,17 +85,6 @@
 
 
 
-                                             
-                        <div class="col-auto">
-
-                            <span class="text-dark pl-1"> {{ __('translate.Sell Price') }} </span>
-                            <input type="number" step="any" name="sell_price" id="purchaseProductInputSellPrice" size="6"  min="0"
-                                class="form-control  mb-2  inputMinZero" >
-                        </div>
-
-
-
-
 
 
                         <div class="col-auto">
@@ -173,7 +162,6 @@
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
                                 <th>{{ __("translate.Purchase Price") }} </th>
-                                <th>{{ __("translate.Sell Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>
@@ -188,7 +176,6 @@
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
                                 <th>{{ __("translate.Purchase Price") }} </th>
-                                <th>{{ __("translate.Sell Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>

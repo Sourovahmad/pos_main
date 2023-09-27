@@ -201,6 +201,7 @@ $create_setting = $settings->setting;
                                         <label for="price">{{ __('translate.Price') }} <span
                                                 class="text-danger">*</span></label>
                                     </div>
+
                                     <div class="col-md-4 col-12">
                                         <select class="form-control form-control" name="is_fixed_price"
                                             id="is_fixed_price" required>
@@ -213,9 +214,18 @@ $create_setting = $settings->setting;
                                             @endif
                                         </select>
                                     </div>
-                                    <div class="col-md-4 col-12" id="priceDiv">
-                                        <input type="number" step="any" name="price" id="price" class="form-control"
-                                            min='0' placeholder="Price" required>
+
+                                    <div class="col-md-2 col-12" id="priceDiv">
+                                        <input type="number" step="any" name="purchase_price" id="price" class="form-control"
+                                            min='0' placeholder="Purchase Price" required>
+
+                                    </div>
+
+
+                                    
+                                    <div class="col-md-2 col-12" id="priceDiv">
+                                        <input type="number" step="any" name="sell_price" id="price" class="form-control"
+                                            min='0' placeholder="Sell Price" required>
 
                                     </div>
 

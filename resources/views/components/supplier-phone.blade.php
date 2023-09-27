@@ -249,20 +249,17 @@ $GLOBALS['CurrentUser']= auth()->user();
  
 
     function selectHighlightedItem() {
+
         var id = $(".searchSupplier.selected").attr("data-item-id");
         var name = $(".searchSupplier.selected").attr('data-item-name');
-        $("#supplier_input_id").val(id)
+
+        $("#supplier_input_id").val(parseInt(id))
         $("#supplierSearchField").val(name)
         
         $("#supplierSuggession").hide();
         $("#supplierSuggession").html("");
         supplierFunction(id);
     }
-
-
-
-
-
 
 
     
@@ -274,8 +271,10 @@ $GLOBALS['CurrentUser']= auth()->user();
     $(document).on('click', '.searchSupplier', function () {
         var id = $(this).attr('data-item-id');
         var name = $(this).attr('data-item-name');
-        $("#supplier_input_id").val(id)
+        $("#supplier_input_id").val(parseInt(id))
         $("#supplierSearchField").val(name)
+
+        console.log("selected suppliler id", id)
         
         $("#supplierSuggession").hide();
         $("#supplierSuggession").html("");

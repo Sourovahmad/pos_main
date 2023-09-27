@@ -58,7 +58,6 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
-        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
     }
@@ -72,7 +71,6 @@ $(document).ready(function () {
         $("#purchaseProductInputName").val('');
         $("#purchaseProductInputPrice").val('');
         $("#purchaseProductInputdiscount").val(0);
-        $("#purchaseProductInputSellPrice").val('');
         $("#purchaseProductInputQuantity").val('');
         $("#purchaseProductInputTotal").val(0);
         $("#purchaseProductError").show();
@@ -99,6 +97,7 @@ $(document).ready(function () {
 
             $("#productIdHidden").val(product.id);
             $("#purchaseProductInputName").val(product.name);
+            $("#purchaseProductInputPrice").val(product.cost_per_unit);
         }
 
     }
@@ -138,24 +137,13 @@ $(document).ready(function () {
     $("#purchaseProductInputPrice").keypress(function (e) {
         if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
             if( !($("#purchaseProductInputPrice").val() == '')  ){
-                $('#purchaseProductInputSellPrice').focus();
-            }
-        }
-
-    });
-
-
-    
-    //done
-    $("#purchaseProductInputSellPrice").keypress(function (e) {
-        if (e.originalEvent.key === 'Enter' || e.originalEvent.keyCode === 13) {
-            if( !($("#purchaseProductInputSellPrice").val() == '')  ){
                 $('#purchaseProductInputQuantity').focus();
             }
         }
 
     });
-    
+
+
     //                               ****************************************
     //                               ########## On Discount Input #############
     //  
@@ -221,7 +209,6 @@ $(document).ready(function () {
             html += '<td>' + purchaseTableData[row].id + '</td>'
             html += '<td>' + purchaseTableData[row].name + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].price).toFixed( 2 ) + '</td>'
-            html += '<td>' + parseFloat(purchaseTableData[row].sellPrice).toFixed( 2 ) + '</td>'
             html += '<td>' + purchaseTableData[row].quantity + '</td>'
             html += '<td>' + parseFloat(purchaseTableData[row].discountValue).toFixed( 2 ) + '</td>'
             html += '<td>' +parseFloat( purchaseTableData[row].total).toFixed( 2 ) + '</td>'
@@ -272,7 +259,6 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
-            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -305,7 +291,6 @@ $(document).ready(function () {
             id: id,
             name: name,
             price: price,
-            sellPrice:sellPrice,
             quantity: parseFloat(purchaseTableData[id].quantity) + parseFloat(quantity),
             discountType: discountType,
             discount: discount,
@@ -331,7 +316,6 @@ $(document).ready(function () {
             // if loaded or modified
             var name = $("#purchaseProductInputName").val().trim();
             var price = $("#purchaseProductInputPrice").val().trim();
-            var sellPrice = $("#purchaseProductInputSellPrice").val().trim();
             var quantity = parseFloat($("#purchaseProductInputQuantity").val().trim());
             var discountType = $("#purchaseProductInputDiscountType").val().trim();
             var discount = $("#purchaseProductInputdiscount").val().trim();
@@ -369,7 +353,6 @@ $(document).ready(function () {
             id: id,
             name: name,
             price: price,
-            sellPrice:sellPrice,
             quantity: parseFloat(quantity),
             discountType: discountType,
             discount: discount,
@@ -474,7 +457,6 @@ $(document).ready(function () {
         $("#productIdHidden").val(product.id);
         $("#purchaseProductInputName").val(product.name);
         $("#purchaseProductInputPrice").val(product.price);
-        $("#purchaseProductInputSellPrice").val(product.sellPrice);
         $("#purchaseProductInputdiscount").val(product.discount);
         $("#purchaseProductInputDiscountType").val(product.discountType);
         $("#purchaseProductInputDiscountValue").val(product.discountValue);
@@ -774,6 +756,8 @@ $(document).ready(function () {
 
 
             let supplierUserId =  $('#supplier_input_id').val();
+            console.log(supplierUserId);
+
           
             if (supplierUserId == ''){
                 $('#supplierSearchField').focus();
@@ -793,8 +777,6 @@ $(document).ready(function () {
                     return;
             }
 
-
-    
 
     
             // $("#orderCompleteButton").attr("disabled", false); /// onlly for testing , after teasting remove this 

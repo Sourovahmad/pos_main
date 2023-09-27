@@ -30,7 +30,8 @@ class ProductRequest extends FormRequest
             "type_id" => "required",
             "unit_id" => "required",
             "stock_alert" => "required",
-            "price" => "required",
+            "sell_price" => "required",
+            "purchase_price" => "required",
 
         ];
     }
@@ -45,7 +46,8 @@ class ProductRequest extends FormRequest
                 'type_id.required' => $messages->require('Type'),
                 'unit_id.required' => $messages->require('Unit'), 
                 'stock_alert.required' => $messages->require('Stock Alert'),
-                'price.required' => $messages->require('Price'),
+                'sell_price.required' => $messages->require('sell_price'),
+                'purchase_price.required' => $messages->require('purchase_price'),
             ];
         }
 }

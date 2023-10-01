@@ -165,12 +165,8 @@
                                     <div class="col-md-8 col-12">
                                         
                                         <select class="form-control form-control" name="unit_id" id="unit_id"  required>
-                                            <option selected disabled value=""> Select Unit </option>
-                                            {{---
-                                    @foreach ($units as $unit)
-                                    <option value="{{$unit->id}}"> {{$unit->name}}</option>
-                                            @endforeach
-                                            ---}}
+                                            <option  disabled value=""> Select Unit </option>
+                                            <option selected value="2">Piece</option>
                                         </select>
                                     </div>
 
@@ -202,11 +198,21 @@
                                             @endif
                                         </select>
                                     </div>
-                                    <div class="col-md-4 col-12" id="priceDiv">
-                                        <input type="number" step="any" name="price" id="price" class="form-control" min='0' placeholder="Price" required>
-                                        
+
+
+                                    <div class="col-md-2 col-12">
+                                        <input type="number" step="any" name="purchase_price" id="price" class="form-control"
+                                            min='0' placeholder="Purchase Price" value="{{ $product->cost_per_unit }}" required>
+
                                     </div>
 
+
+                                    
+                                    <div class="col-md-2 col-12">
+                                        <input type="number" step="any" name="sell_price" id="price" class="form-control"
+                                            min='0' placeholder="Sell Price" value="{{ $product->price_per_unit }}" required>
+
+                                    </div>
 
 
 
@@ -319,72 +325,7 @@
 </div>
 
 
-<script>
-    $(document).ready(function () {
 
-        var product = @json($product);
-        
-      
-
-            var type_id = $("#type_id").val();
-            var units = @json($units);
-            var dataArray = units[type_id];
-            
-            console.log(type_id);units[type_id]
-
-
-            html = "";
-            $.each(dataArray, function (key) {
-                if(dataArray[key].id == product.unit_id){
-                    html += '<option selected value="' + dataArray[key].id + '" >' + dataArray[key].name +
-                    '</option>';
-
-                    $('#price').val(product.price_per_unit * dataArray[key].value);
-                }
-                else{
-                    html += '<option  value="' + dataArray[key].id + '" >' + dataArray[key].name +
-                    '</option>';
-                }
-                
-            });
-            $("#unit_id").html(html);
-        
-
-
-        
-
-        $("#type_id").on('change', function () {
-
-            
-            type_id = $("#type_id").val();
-            
-            dataArray = units[type_id];
-            
-            console.log(type_id);units[type_id]
-
-
-            html = "";
-            $.each(dataArray, function (key) {
-                if(dataArray[key].id == product.unit_id){
-                    html += '<option selected value="' + dataArray[key].id + '" >' + dataArray[key].name +
-                    '</option>';
-
-                    $('#price').val(product.price_per_unit * dataArray[key].value);
-                }
-                else{
-                    html += '<option  value="' + dataArray[key].id + '" >' + dataArray[key].name +
-                    '</option>';
-                }
-                
-            });
-            $("#unit_id").html(html);
-        
-           
-
-        });
-    });
-
-</script>
 
 
 

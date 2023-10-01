@@ -394,10 +394,6 @@ $(document).ready(function () {
     function purchaseInputSubmitFunction() {
 
 
-
-
-
-
         var submitButtonType = $("#purchaseProductInputSubmit").data("submit-type");
         var submitButtonProductId = $("#purchaseProductInputSubmit").data("item-id");
         var id = parseInt($("#purchaseProductInputId").val().trim());
@@ -405,27 +401,17 @@ $(document).ready(function () {
         if (submitButtonType == 'update') {
             console.log("submitButtonType == 'update'");
             if (submitButtonProductId == id) {
-                // update method
-                console.log("udpate method called");
                 updateProductOnPruchaseCart();
             } else {
-                // create method
-                console.log("create method called");
                 AddNewProductOnPruchaseCart();
             }
         } else {
-            // create method
-            console.log("create method called on else");
             AddNewProductOnPruchaseCart();
         }
 
 
         $("#purchaseProductInputSubmit").data("submit-type", 'create');
         $("#purchaseProductInputSubmit").data("item-id", 0);
-
-
-
-
 
 
 
@@ -489,7 +475,8 @@ $(document).ready(function () {
     //done
     $("body").on("click", "#purchaseProductTableEdit", function () {
         var prooductId = $(this).attr('productId');
-        console.log("Clicked On update button " + prooductId);
+
+        
         $("#purchaseProductInputSubmit").data("submit-type", 'update');
         $("#purchaseProductInputSubmit").data("item-id", prooductId);
         $("#purchaseProductInputSubmit").attr("disabled", false);
@@ -567,8 +554,8 @@ $(document).ready(function () {
         $("#purchasePreviousDue").text(previousDue.toFixed( 2 ));
 
         var subTotal = parseFloat($("#purchaseSubtotal").text().trim());
-        var total = parseFloat(subTotal + previousDue);
-        $("#totalWithOutDue").val(parseFloat(subTotal ).toFixed( 2 ));
+        var total = parseFloat(subTotal);
+        $("#totalWithOutDue").val(parseFloat(subTotal).toFixed( 2 ));
         $("#finalTotal").text(total.toFixed( 2 ));
         $("#current_total_hidden_input").val(total);
         $("#PayAmount").val(total.toFixed( 2 ));

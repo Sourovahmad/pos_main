@@ -97,7 +97,7 @@ $GLOBALS['CurrentUser']= auth()->user();
             //                         this is the property of purchase create page
             $("#purchasePreviousDue").text(supplier.due);
             $("#totalDue").text(0);
-            var finalTotal = parseInt($("#finalTotal").text().trim()) + parseInt(supplier.due);
+            var finalTotal = parseInt($("#finalTotal").text().trim());
             $("#finalTotal").text(finalTotal);
             $("#PayAmount").val(finalTotal);
             $("#changeAmount").html('');

@@ -74,9 +74,9 @@ $GLOBALS['CurrentUser']= auth()->user();
             //                         this is the property of purchase create page
             $("#purchasePreviousDue").text(supplier.due);
             $("#totalDue").text(0);
-            var finalTotal = parseInt($("#finalTotal").text().trim()) + parseInt(supplier.due);
-            $("#finalTotal").text(finalTotal);
-            $("#PayAmount").val(finalTotal);
+            var finalTotal = parseInt($("#finalTotal").text().trim());
+            $("#finalTotal").text(0);
+            $("#PayAmount").val(0);
             $("#changeAmount").html('');
 
 
@@ -194,6 +194,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                     $("#totalLimit_input_hidden").val(resultQery[0].total);
 
                     $.each(purchaseProducts, function(index, value) {
+                        
                         $("#productIdHidden").val(value.product_id);
                         $("#purchaseProductInputId").val(value.product_id);
                         $("#purchaseProductInputName").val(value.product.name);
@@ -205,6 +206,7 @@ $GLOBALS['CurrentUser']= auth()->user();
                      
 
                         $("#purchaseProductInputSubmit").click();
+
                     });
 
                 }else{

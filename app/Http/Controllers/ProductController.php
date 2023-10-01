@@ -215,7 +215,8 @@ class ProductController extends Controller
        $product->stock_controll=$request->stock_controll; 
        
        $product->is_fixed_price = $request->is_fixed_price;
-       $product->price_per_unit= $request->price;
+       $product->price_per_unit= $request->sell_price;
+       $product->cost_per_unit = $request->purchase_price;
        $product->save();
      
        $this->onlineSync('Product','update',$product->id);

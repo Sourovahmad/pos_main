@@ -26,6 +26,7 @@ use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PosSettingController;
+use App\Http\Controllers\QuotaionController;
 use App\Http\Controllers\ReturnFromCustomerController;
 
 use App\Http\Controllers\SettingController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\userRoleController;
 use App\Http\Controllers\WarrentyController;
+use App\Models\supplier;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
@@ -88,6 +90,8 @@ Route::resource('return-from-customers', ReturnFromCustomerController::class);
 
 Route::resource('customer-due-receives', CustomerDueReceiveController::class);
 Route::resource('supplier-due-pays', SupplierDuePayController::class);
+Route::get('supplier-due-list.index', [SupplierDuePayController::class, "dueList"])->name('supplier-due-list.index');
+Route::get('customer-due-list', [CustomerController::class, "customerDueList"])->name('customerDueList');
 
 
 
@@ -125,20 +129,21 @@ Route::get('sell-analysis', [AnalysisController::class, 'sellAnalysis'])->name('
 
 
 //   Permission Route
-
 Route::resource('user-roles', userRoleController::class);
-
-
 Route::post('role-permission-store', [userRoleController::class, 'rolepermissionstore'])->name('rolepermissionstore');
 
 
 
-
-
-
 Route::resource('settings', SettingController::class);
+Route::get('setting-decode', [SettingController::class, "decodeString"]);
 
 
+
+
+// quation
+Route::get('quotation-index', [QuotaionController::class, "index"])->name('quotation-index');
+Route::get('quotation-create', [QuotaionController::class, "create"])->name('quotation-create');
+Route::post('quotation-generate', [QuotaionController::class, "store"])->name('quotation-generate');
 
 
 

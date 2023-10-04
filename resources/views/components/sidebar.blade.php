@@ -91,6 +91,42 @@
     @endif
 
 
+
+    @if( $GLOBALS['CurrentUser']->can('Product Page'))
+
+
+    <hr class="sidebar-divider m-1 p-0 ">
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseQuotation" aria-expanded="true" aria-controls="collapseQuotation">
+            
+            <i class="fas fa-envelope-square"></i>
+
+            <span>{{__('translate.Quotation')}}</span>
+        </a>
+        <div id="collapseQuotation" class="collapse" aria-labelledby="headingSell" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+
+            
+                <a class="collapse-item" href="{{ route('quotation-index') }}">{{__('translate.Quotation List')}} </a>
+                <a class="collapse-item" href="{{ route('quotation-create') }}">{{__('translate.Quotation Create')}} </a>
+               
+
+            </div>
+        </div>
+    </li>
+
+
+
+
+
+    @endif
+
+
+
+
     @if(  $GLOBALS['CurrentUser']->can('Order Create Page')  ||  $GLOBALS['CurrentUser']->can('Order Page') ||  $GLOBALS['CurrentUser']->can('Return From Customer Page') ||  $GLOBALS['CurrentUser']->can('Return From Customer Create Page') )
     <!-- Divider -->
     <hr class="sidebar-divider m-1 p-0 ">
@@ -121,6 +157,10 @@
             </div>
         </div>
     </li>
+
+
+
+
     @endif
 
 
@@ -181,13 +221,14 @@
     
                     @can('Customer Page')
                     <a class="collapse-item" href="{{ route('customers.index') }}">{{__('translate.Customer')}} </a>
+                    <a class="collapse-item" href="{{ route('customerDueList') }}">{{__('Due list')}} </a>
                     @endcan
                     @if( $GLOBALS['CurrentUser']->can('Customer Due Receive Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due'))
-                    <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Due Receive List')}} </a>
+                    <a class="collapse-item" href="{{ route('customer-due-receives.index') }}">{{__('translate.Due Collection List')}} </a>
                     @endif
                     
                     @if( $GLOBALS['CurrentUser']->can('Customer Due Receive Create Page') && $GLOBALS['CurrentUser']->can('Allow Customer Due'))
-                    <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Due Receive')}}  </a>
+                    <a class="collapse-item" href="{{ route('customer-due-receives.create') }}">{{__('translate.Due Collection')}}  </a>
                     @endif
     
                 </div>
@@ -212,13 +253,18 @@
                     <a class="collapse-item" href="{{ route('suppliers.index') }}">{{__('translate.Supplier')}} </a>
                     @endcan
 
+
+                    <a class="collapse-item" href="{{ route('supplier-due-list.index') }}">{{__('translate.Due List')}}  </a>
+
+
+
                     @if( $GLOBALS['CurrentUser']->can('Supplier Due Pay Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due'))
-                    <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Due Pay List')}} </a>
+                    <a class="collapse-item" href="{{ route('supplier-due-pays.index') }}">{{__('translate.Due Collection List')}} </a>
                     @endif
 
                     @if( $GLOBALS['CurrentUser']->can('Supplier Due Pay Create Page') && $GLOBALS['CurrentUser']->can('Allow Supplier Due'))
                     
-                    <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Due Pay')}}  </a>
+                    <a class="collapse-item" href="{{ route('supplier-due-pays.create') }}">{{__('translate.Due Collection')}}  </a>
                     @endif
     
                 </div>
@@ -305,10 +351,11 @@
         <div id="collapseExpenses" class="collapse" aria-labelledby="headingExpenses" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
 
-
                 @can('Expense Page')
                 <a class="collapse-item" href="{{ route('expenses.index') }}">{{__('translate.Daily')}}</a>
                 @endcan
+
+
                 @can('Expense Monthly Page')
                 <a class="collapse-item" href="{{ route('expense-monthlies.index') }}">{{__('translate.Monthly')}}</a>
                 @endcan

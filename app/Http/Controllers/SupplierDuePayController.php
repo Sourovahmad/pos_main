@@ -79,6 +79,11 @@ class SupplierDuePayController extends Controller
         $due->supplier_id = $request->supplier_id;
         $due->amount = $request->amount;
         $due->comment = $request->comment;
+        $due->payment_method = $request->paymentMethod;
+        if(!is_null($request->check_number)){
+            $due->check_number = $request->check_number;
+        }
+
         $due->pre_due = $supplier->due;
         $supplier->due = $supplier->due - $request->amount;
         $due->save();
@@ -87,7 +92,7 @@ class SupplierDuePayController extends Controller
 
 
         $this->onlineSync('supplierDuePay','create',$due->id);
-        $this->onlineSync('supplier','update',$supplier->id);
+        $this->onlineSync('supplier','update',$supplier->id); 
 
 
         $this->purchaseAnalysis($request->amount);
@@ -185,6 +190,32 @@ class SupplierDuePayController extends Controller
         $this->onlineSync('purchaseAnalysisMonthly',$monthly_method,$sellMonthly->id);
         $this->onlineSync('purchaseAnalysisYearly',$yearly_method,$sellYearly->id);
       
+    }
+
+
+
+   public function dueList() {
+
+
+        if(! auth()->user()->hasPermissionTo('Supplier Page')){
+            return abort(401);
+        }
+       
+        $settings = setting::where('table_name','suppliers')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+
+        $suppliers = supplier::where("due", ">", 0)->get();
+        
+        
+        $dataArray=[
+            'settings'=>$settings,
+            'items' => $suppliers,
+            'page_name' => 'Supplier',
+        ];
+ 
+        // return $dataArray;
+
+        return view('suppliers.index', compact('dataArray'));
     }
 
 }

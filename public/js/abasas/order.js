@@ -463,7 +463,10 @@ $(document).ready(function () {
     //                                           ########## Final caculation start    #############
     //                               *******************************************************************************
     //
+
+
     function calMoreDiscount() {
+        
         var discountType = $("#productPurchaseMoreDiscountType").val().trim();
         var productPurchaseTotal = parseFloat(
             $("#productPurchaseTotal").val().trim()
@@ -499,6 +502,9 @@ $(document).ready(function () {
         }
     }
 
+
+
+
     function calSubTotal() {
         var ProductDiscountTotal = parseFloat(
             $("#ProductDiscountTotal").text().trim()
@@ -532,10 +538,17 @@ $(document).ready(function () {
 
         // var tax = parseFloat($("#taxValue").text().trim());
         var subTotal = parseFloat($("#purchaseSubtotal").text().trim());
-        var total = subTotal + previousDue;
-        $("#totalWithOutDue").val(subTotal);
-        $("#finalTotal").text(total.toFixed(2));
-        $("#PayAmount").val(total.toFixed(2));
+        var total = subTotal;
+
+
+        // calculate the tax info
+        let totalTaxAdded = $("#add_tax_input").val().trim();
+        let amountInTax = total / 100 * totalTaxAdded;
+        let amountAfterRemovingTax = total + amountInTax
+
+        $("#totalWithOutDue").val(amountAfterRemovingTax);
+        $("#finalTotal").text(amountAfterRemovingTax.toFixed(2));
+        $("#PayAmount").val(amountAfterRemovingTax.toFixed(2));
         $("#totalDue").text(0);
     }
 
@@ -552,7 +565,7 @@ $(document).ready(function () {
         calculatePurchaseFinal();
 
         var subtotal = parseFloat(calSubTotal());
-        console.log("SubTotal " + subtotal);
+        
         if (subtotal < 0) {
             $(this).val(0);
 
@@ -570,6 +583,36 @@ $(document).ready(function () {
             calculatePurchaseFinal();
         }
     });
+
+
+    
+    $("#add_tax_input").on("input", function () {
+        calculatePurchaseFinal();
+
+        var subtotal = parseFloat(calSubTotal());
+        
+        if (subtotal < 0) {
+            $(this).val(0);
+
+            calculatePurchaseFinal();
+        }
+
+        var data = $(this).val().trim();
+
+        if (data.length < 1) {
+            $(this).val(0);
+            calculatePurchaseFinal();
+        }
+        if (data < 0) {
+            $(this).val(0);
+            calculatePurchaseFinal();
+        }
+    });
+
+
+
+
+
     // $("#moreDiscountInput").on('change', function () {
     //     calculatePurchaseFinal();
 

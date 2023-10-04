@@ -1,6 +1,6 @@
 @extends('includes.app')
 @php
-   $GLOBALS['CurrentUser']= auth()->user();   
+   $GLOBALS['CurrentUser']= auth()->user(); 
 @endphp
 
 
@@ -11,6 +11,8 @@
     background-color: #ebbe5c;
 }
 </style>
+
+
 
 <div class="loader" style="display: none;" id="pageloader">
     <img src="{{ asset('image/loading.gif') }}" alt="Loading..." />
@@ -24,7 +26,7 @@
 
             <div class="card-header py-3 bg-abasas-dark  text-light ">
                 <nav class="navbar ">
-                    <span><a class="navbar-brand">{{ __('translate.Order') }}</a> @can('Super Admin') <i class="fas fa-tools pl-2"
+                    <span><a class="navbar-brand">{{ __('translate.Quotation') }}</a> @can('Super Admin') <i class="fas fa-tools pl-2"
                         id="pageSetting" data-toggle="modal" data-target="#setting-modal"></i> @endcan </span>
 
                 </nav>
@@ -70,12 +72,20 @@
                             <input type="text" name="name" id="purchaseProductInputName" size="20" value=""
                                 class="form-control  mb-2" readonly>
                         </div>
+
+
+
+
                         <div class="col-auto">
 
-                            <span class="text-dark pl-1"> {{ __('translate.Price') }} </span>
-                            <input type="number" step="any" name="price" id="purchaseProductInputPrice" size="6" value=0 min="0"
+                            <span class="text-dark pl-1"> {{ __('translate.Purchase Price') }} </span>
+                            <input type="number" step="any" name="price" id="purchaseProductInputPrice" size="6"  min="0"
                                 class="form-control  mb-2  inputMinZero" >
                         </div>
+
+
+
+
 
                         <div class="col-auto">
 
@@ -102,7 +112,7 @@
 
                         <div class="col-auto">
                             <span class="text-dark pl-1">{{ __('translate.Quantity') }} </span>
-                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" value=1 min="0"
+                            <input type="number" step="any" name="quantity" id="purchaseProductInputQuantity" size="6" min="0"
                                 min="1" class="form-control  mb-2 inputMinZero ">
                         </div>
 
@@ -127,7 +137,6 @@
 
                 </form>
                 <div id="purchaseProductError" class="text-danger " style="display: none;">{{ __('translate.Product not found, try again !!!') }} </div>
-                <div id="purchaseProductStockError" class="text-danger " style="display: none;">{{ __('translate.Product dont have enough stock, try again !!!') }} </div>
 
 
 
@@ -152,7 +161,7 @@
                                 <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
-                                <th>{{ __("translate.Price") }} </th>
+                                <th>{{ __("translate.Purchase Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>
@@ -166,7 +175,7 @@
                                 <th>#</th>
                                 <th>{{ __("translate.Id") }}</th>
                                 <th>{{ __("translate.Name") }}</th>
-                                <th>{{ __("translate.Price") }} </th>
+                                <th>{{ __("translate.Purchase Price") }} </th>
                                 <th>{{ __("translate.Quantity") }} </th>
                                 <th>{{ __("translate.Discount") }} </th>
                                 <th>{{ __("translate.Total") }} </th>
@@ -188,7 +197,7 @@
     </div>
     <div class="col-12 col-md-4 row">
 
-        <x-customer-phone />
+        <x-supplier-phone />
 
 
 
@@ -209,8 +218,6 @@
 
                     <input type="text" name="" id="productPurchaseTotal" value='0' class="inputMinZero" hidden>
 
-
-
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-8 ">
                             <div class="text-left  "> {{ __("translate.Discount More") }} <span id="moreDiscountPercentageIcon"> ( % ) </span>
@@ -222,37 +229,19 @@
                         </div>
                     </div>
 
-
-                    
-
-                    <div class="row border-bottom border-dark mb-2">
-                        <div class="col-8 ">
-                            <div class="text-left  "> {{ __("translate.Vat & tax") }} <span> ( % ) </span> </div>
-                        </div>
-                        <div class="col-4">
-                            <input type="text" id="add_tax_input" class="form-control form-control-sm inputMinZero" value="0">
-                        </div>
-                    </div>
-
-
-
-
-
-
                     <input type="number" step="any" id="productPurchaseMoreDiscountType" value='1' class="inputMinZero" hidden>
 
                     <input type="text" name="" id="discountTotal" value="0" class="inputMinZero" hidden>
-                    <input type="text" name="" id="totalTaxAmount" value="0" class="inputMinZero" hidden>
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
-                            <div class="text-left  "> {{ __("translate.Total Discount") }} </div>
+                            <div class="text-left  "> {{ __("translate.Total Dioscount") }} </div>
                         </div>
                         <div class="col-6">
                             <div class="text-right " id="totalDiscountInText">0 + 0</div>
                         </div>
                     </div>
 
-
+{{-- 
                     <div class="row border-bottom border-dark mb-2">
                         <div class="col-6 ">
                             <div class="text-left  "> {{ __("translate.Tax") }}</div>
@@ -260,7 +249,7 @@
                         <div class="col-6">
                             <div class="text-right " id="taxValue">0</div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="row border-bottom border-dark bg-dark mb-2">
                         <div class="col-6 ">
@@ -271,7 +260,7 @@
                         </div>
                     </div>
 
-                    <div class="row border-bottom border-dark  mb-2" @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>
+                    <div class="row border-bottom border-dark  mb-2" @if(! $GLOBALS["CurrentUser"]->can("Allow Supplier Due")  ) hidden @endif>
                         <div class="col-6 ">
                             <div class="text-left  "> {{ __("translate.Previous Due") }}</div>
                         </div>
@@ -286,13 +275,13 @@
                     </div>
 
                     <div class="row mb-2">
-                        <div class="col-12 @can('Allow Customer Due') col-md-6 @endcan pt-1 pb-1 border-dark bg-dark border-dotted ">
+                        <div class="col-12 @can('Allow Supplier Due') col-md-6 @endcan pt-1 pb-1 border-dark bg-dark border-dotted ">
                             <div class="text-center h5 "> {{ __("translate.Total") }}</div>
                             <input type="text" name="" id="totalWithOutDue" value=0 class="inputMinZero" hidden>
                             <div class="text-center h5 text-success " id="finalTotal">0</div>
                         </div>
                        
-                        <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted" @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>
+                        <div class="col-12 col-md-6  border-dark pt-1 pb-1  border-dotted" @if(! $GLOBALS["CurrentUser"]->can("Allow Supplier Due")  ) hidden @endif>
                             <div class="text-center h5">  {{ __("translate.Due") }}</div>
                             <div class="text-center h5 text-danger" id="totalDue">0 </div>
                         </div>
@@ -363,6 +352,11 @@
 
                   
              
+
+
+
+
+
 
 
 
@@ -445,7 +439,7 @@
                     </label>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 </div>
 
@@ -530,7 +524,7 @@
              </div>
              <form action="{{ route('rolepermissionstore') }}" method="post">
                 @csrf
-                <input type="text" name="page_name" value="Order Create" required hidden>
+                <input type="text" name="page_name" value="Purchase Create" required hidden>
              <div class="modal-body" >
 
 
@@ -554,7 +548,7 @@
 
 
                             @php
-                            $permision_name = "Order Create Page";
+                            $permision_name = "Purchase Create Page";
                             @endphp
                             
                             <tr class="data-row">
@@ -595,50 +589,11 @@
 
 
 
-
-
-<!-- Attachment Modal -->
-<div class="modal fade" id="PrintPurchaseModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-dark" id="edit-modal-label ">ffgfdhfghfghgfhghghghghg </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="attachment-body-content">
-                <form id="data-edit-form" class="form-horizontal" method="POST" action="">
-                    @csrf
-                    @method('put')
-                    <div class="form-group">
-                        <label class="col-form-label" for="modal-update-hidden-id">{{__('translate.Id')}} </label>
-                        <input type="text" name="id" class="form-control" id="modal-update-hidden-id" required readonly>
-                    </div>
-
-                    <div id="editOptions"></div>
-
-
-
-
-
-                    <div class="form-group">
-
-                        <input type="submit" id="submit-button" value=" {{__('translate.Submit')}}" class="form-control btn btn-success">
-                    </div>
-
-
-
-
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 <!-- /Attachment Modal -->
-<iframe id="orderPrintFrame" style="visibility:hidden; height:0; width:0;"></iframe>
+<iframe id="purchasePrintFrame" style="visibility:hidden; height:0; width:0;"></iframe>
 
 
-<script src="{{ asset('js/abasas/order.js') }}"></script>
+
+<script src="{{ asset('js/abasas/quotation.js') }}"></script>
 
 @endsection

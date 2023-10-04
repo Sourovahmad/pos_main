@@ -85,8 +85,7 @@ $GLOBALS['CurrentUser']= auth()->user();
 
             html += '<div class="text-center text-light"  id="customerCompany"  >{{ __('translate.Company') }} : ' + customer.company +
                 '</div>';
-            html += '<div class="text-center text-light"   @if(! $GLOBALS["CurrentUser"]->can("Allow Customer Due")  ) hidden @endif>{{ __('translate.Due') }} : <span class="text-danger" id="customerDue">' +
-                customer.due + '</span></div>';
+           
             $("#customerPhoneArea").html(html);
             $("#customerPhoneArea").show();
 
@@ -95,7 +94,7 @@ $GLOBALS['CurrentUser']= auth()->user();
             //                         this is the property of purchase create page
             $("#purchasePreviousDue").text(customer.due);
             $("#totalDue").text(0);
-            var finalTotal = parseInt($("#finalTotal").text().trim()) + parseInt(customer.due);
+            var finalTotal = parseInt($("#finalTotal").text().trim());
             $("#finalTotal").text(finalTotal);
             $("#PayAmount").val(finalTotal);
             $("#changeAmount").html('');

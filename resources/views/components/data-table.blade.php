@@ -6,13 +6,17 @@
  $componentDetails=$settings->setting[0]['componentDetails'];
  $items= $dataArray['items'];
  $page_name = $dataArray['page_name'];
+ 
  $GLOBALS['CurrentUser']= auth()->user();   
+
+ $sumOfexpenses = $dataArray['sumOfexpenses'] ?? "nothing"; 
 
  @endphp
  <script>
      var dataArray = @json($dataArray);
      var dataArrayLength = "{{ sizeof($items) }}"
-     console.log(dataArray)
+     var totalExpense = @json($sumOfexpenses);
+
 
  </script>
 
@@ -807,12 +811,49 @@
 
 
 
-         $('#dataTable').DataTable({
+      
+         if(totalExpense == "nothing"){
+            $('#dataTable').DataTable({
              dom: 'lBfrtip',
              buttons: [
                  'csv', 'excel', 'pdf', 'print'
              ]
          });
+         }else{
+            $('#dataTable').DataTable({
+             dom: 'lBfrtip',
+             buttons: [
+                {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        customize: function(doc) {
+                            // Append total row count to the end of the PDF document
+                            doc.content.push({ text: 'Total Amount: ' + totalExpense, margin: [0, 0, 0, 12] });
+                        }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    customize: function(csv) {
+                        return csv + '\n"Total Amount: ' + totalExpense + '"';
+                    }
+                },
+
+                {
+                    extend: 'excel',
+                    text: 'Export to Excel',
+                    customize: function(xlsx) {
+                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        
+                        // Append a new row with the total count of rows in the table
+                        $('row:last', sheet).after('<row><c t="inlineStr"><is><t>Total Amount: ' + totalExpense + '</t></is></c></row>');
+                    }
+                }
+             ]
+         });
+         }
+
+
 
 
 

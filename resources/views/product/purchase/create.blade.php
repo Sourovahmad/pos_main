@@ -1,6 +1,6 @@
 @extends('includes.app')
 @php
-   $GLOBALS['CurrentUser']= auth()->user();   
+   $GLOBALS['CurrentUser']= auth()->user(); 
 @endphp
 
 

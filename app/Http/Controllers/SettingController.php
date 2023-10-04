@@ -16,7 +16,6 @@ class SettingController extends Controller
     public function index()
     {
 
-
         $a = '[{
             "componentDetails":{
                 "title":"Purchase List",
@@ -246,8 +245,123 @@ class SettingController extends Controller
      * @param  \App\Models\setting  $setting
      * @return \Illuminate\Http\Response
      */
-    public function destroy(setting $setting)
+    public function decodeString()
     {
-        //
+        $a = '[
+            {
+                "componentDetails": {
+                    "title": "Due Paid List",
+                    "editTitle": "Edit Due Paid"
+                },
+                "routes": {
+                    "create": {
+                        "name": "supplier-due-pays.store",
+                        "link": "supplier-due-pays"
+                    },
+                    "update": {
+                        "name": "supplier-due-pays.update",
+                        "link": "supplier-due-pays"
+                    },
+                    "delete": {
+                        "name": "supplier-due-pays.destroy",
+                        "link": "supplier-due-pays"
+                    }
+                },
+                "fieldList": [
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "1",
+                        "input_type": "text",
+                        "name": "user_name",
+                        "title": "Reference",
+                        "database_name": "user_id"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "1",
+                        "input_type": "text",
+                        "name": "supplier",
+                        "title": "Supplier",
+                        "database_name": "supplier_id"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "number",
+                        "name": "amount",
+                        "title": "Amount",
+                        "database_name": "amount"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "number",
+                        "name": "pre_due",
+                        "title": "Previous Due",
+                        "database_name": "pre_due"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "text",
+                        "name": "payment_method",
+                        "title": "Payment Method",
+                        "database_name": "payment_method"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "text",
+                        "name": "check_number",
+                        "title": "Check Number",
+                        "database_name": "check_number"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "text",
+                        "name": "comment",
+                        "title": "Comment",
+                        "database_name": "comment"
+                    },
+                    {
+                        "position": 111,
+                        "create": "3",
+                        "read": "1",
+                        "update": "3",
+                        "require": "0",
+                        "input_type": "text",
+                        "name": "time",
+                        "title": "Time",
+                        "database_name": "created_at"
+                    }
+                ]
+            }
+        ]';
+
+
+        return json_encode($a);
+
     }
 }

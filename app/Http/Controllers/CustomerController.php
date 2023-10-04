@@ -42,6 +42,27 @@ class CustomerController extends Controller
 
     }
 
+
+   public function customerDueList() {
+
+        if(! auth()->user()->hasPermissionTo('Customer Page')){
+            return abort(401);
+        }
+         
+        $settings = setting::where('table_name','customers')->first();
+        $settings->setting= json_decode(  json_decode(  $settings->setting,true),true);
+        
+                
+                $dataArray=[
+                    'settings'=>$settings,
+                    'items' => customer::where("due", ">", 0)->get(),
+                    'page_name'=>'Customer',
+                ];
+        
+        
+                return view('customers.index', compact('dataArray'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

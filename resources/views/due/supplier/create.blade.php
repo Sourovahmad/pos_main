@@ -60,6 +60,31 @@
                                 <input type="number" step="any" id="SupplierCashAmount" name="amount" class="form-control mb-2" required>
                             </div>
 
+
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="paymentMethod">  {{ __('translate.Payment Method') }}<span class="text-danger">*</span></label>
+
+                                <select class="form-control form-control" name="paymentMethod"
+                                id="paymentMethodSelect" required>
+                               
+                                <option selected value="cash"> {{ __('translate.Cash') }} </option>
+                                <option value="check"> {{ __('translate.Check') }} </option>
+                               
+                            </select>
+                            </div>
+
+
+
+                            <div class="col-12 col-md-4" id="check_number_div" hidden>
+
+                                <label for="check_number">{{ __('translate.Check Number') }}</label>
+                                <input type="text" name="check_number" id="check_number" class="form-control mb-2">
+                            </div>
+
+
+
                             <div class="col-12 col-md-4">
 
                                 <label for="comment">{{ __('translate.Comment') }}</label>
@@ -190,6 +215,16 @@
                 var id = $('#supplier_input_id').val();
                 $('#SupplierCashsupplierId').val(id);
             })
+
+
+            $("#paymentMethodSelect").on("change", function(){
+                const valueOfSelector = $("#paymentMethodSelect").val();
+                if(valueOfSelector == "check"){
+                    $("#check_number_div").removeAttr("hidden");
+                }else{
+                    $("#check_number_div").attr("hidden", true);
+                }
+            });
        });
    </script>
 

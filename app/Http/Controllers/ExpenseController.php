@@ -39,12 +39,19 @@ class ExpenseController extends Controller
         if (!is_null($request->month)) {
             $month = $request->month;
         }
+
+
+        $totalExpenses  = expense::where('created_at', '>=', $month . '-01 00:00:00')->where('created_at', '<=', $month . '-31 23:59:59')->get();
+        $sumOfexpenses = expense::where('created_at', '>=', $month . '-01 00:00:00')->where('created_at', '<=', $month . '-31 23:59:59')->sum("amount");
+
+
         $dataArray = [
             'settings' => $settings,
-            'items' => expense::where('created_at', '>=', $month . '-01 00:00:00')->where('created_at', '<=', $month . '-31 23:59:59')->get(),
+            'items' => $totalExpenses,
             'employees' => employee::where('id','!=',1)->get(),
             'expense_types' => expenseType::all(),
             'page_name' => 'Expense',
+            "sumOfexpenses" => $sumOfexpenses,
         ];
         $month = Carbon::parse($month)->format('F, Y');
         return view('expenses.index', compact('dataArray', 'month'));

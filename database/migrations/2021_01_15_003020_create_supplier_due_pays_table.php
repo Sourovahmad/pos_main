@@ -20,7 +20,9 @@ class CreateSupplierDuePaysTable extends Migration
             $table->double('amount',10,2)->default(0);
             $table->double('pre_due',10,2)->default(0);
             $table->string('comment')->nullable();
-                        $table->json('data')->nullable();
+            $table->json('data')->nullable();
+            $table->string('check_number')->default(0);
+            $table->string('payment_method')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

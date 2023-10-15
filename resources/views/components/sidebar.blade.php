@@ -73,6 +73,7 @@
 
 
 
+    
     @if( $GLOBALS['CurrentUser']->can('Product Page'))
 
 
@@ -89,6 +90,7 @@
 
 
     @endif
+
 
 
 
@@ -144,6 +146,12 @@
                 @can('Order Create Page')
                 <a class="collapse-item" href="{{ route('orders.create') }}">{{__('translate.Product Sell')}} </a>
                 @endcan
+                
+                @can('Order Create Page')
+                <a class="collapse-item" href="{{ route('opdSales.create') }}">{{__('translate.OPD SALE')}} </a>
+                @endcan
+
+
                 @can('Order Page')
                 <a class="collapse-item" href="{{ route('orders.index') }}">{{__('translate.Sell List')}} </a>
                 @endcan

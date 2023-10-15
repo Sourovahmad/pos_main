@@ -511,7 +511,7 @@ return[
 'Quotation List'=>'Quotation List',
 'Quotation Create'=>'Quotation Create',
 'Vat & tax'=>'Vat & tax',
-''=>'',
+'OPD SALE'=>'OPD SALE',
 ''=>'',
 ''=>'',
 ''=>'',

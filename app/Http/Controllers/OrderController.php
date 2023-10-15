@@ -24,6 +24,7 @@ use App\Models\unit;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use NumberToWords\NumberToWords;
 use Spatie\Permission\Models\Role;
@@ -135,15 +136,15 @@ class OrderController extends Controller
             $databaseProduct = Product::find($product['id']);
             $orderDetail->order_id = $order->id;
             $orderDetail->product_id = $product['id'];
-            $orderDetail->price = $product['price'] / $databaseProduct->unit->value ;
-            $orderDetail->quantity = $product['quantity'] * $databaseProduct->unit->value  ;
+            $orderDetail->price = $product['price'] ;
+            $orderDetail->quantity = $product['quantity'];
             $orderDetail->discount = $product['discount'];
             $orderDetail->tax = $product['tax'];
             $orderDetail->cost = $product['cost'];
             $orderDetail->total = $product['total'];
             $orderDetail->profit = $product['profit'];
             $cost += $product['cost'];
-            $profit += $product['profit'];
+            $profit += ($product['price'] - $databaseProduct->cost_per_unit) * $product['quantity'];
             $productCount += $orderDetail->quantity;
              $orderDetail->save();
 
@@ -167,6 +168,7 @@ class OrderController extends Controller
         $order->profit =$profit;
         $order->save();
 
+        Log::info("total sell profit for this order", ["profit" => $profit]);
 
 
         $this->onlineSync('order','create',$order->id);
@@ -370,13 +372,20 @@ class OrderController extends Controller
     }
     public function calculationAnalysis($order){
 
+
+
         $daily_method_type = $monthly_method_type = $yearly_method_type = 'update';
         $month = Carbon::now()->format('Y-m-01');
         $date = Carbon::now()->format('Y-m-d');
         $year = Carbon::now()->format('Y');
+
+
         $calculationAnalysisDaily= calculationAnalysisDaily::where('date',$date)->first();
         $calculationAnalysisMonthly= calculationAnalysisMonthly::where('month',$month)->first();
         $calculationAnalysisYearly= calculationAnalysisYearly::where('year',$year)->first();
+
+
+
         if(is_null($calculationAnalysisDaily)){
             $calculationAnalysisDaily= new calculationAnalysisDaily;
             $calculationAnalysisDaily->date=$date;
@@ -392,6 +401,7 @@ class OrderController extends Controller
             $calculationAnalysisYearly->year=$year;
             $yearly_method_type = 'create';
         }
+
         $calculationAnalysisDaily->sell_profit += $order->profit;
         $calculationAnalysisMonthly->sell_profit += $order->profit;
         $calculationAnalysisYearly->sell_profit += $order->profit;

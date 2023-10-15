@@ -26,7 +26,11 @@ class AnalysisController extends Controller
         $roles = Role::all();
         $data = array();
         $today = Carbon::now()->format('Y-m-d');
+
         $calculation = calculationAnalysisDaily::where('date',$today)->first();
+
+
+        
         $sell = sellAnalysisDaily::where('date',$today)->first();
         $buy = purchaseAnalysisDaily::where('date',$today)->first();
         $data['sell'] = $data['buy'] = $data['sellProfit'] = $data['profit'] = $data['expense'] = $data['payment'] = $data['sellCount'] = $data['buyCount'] = 0;
@@ -661,6 +665,15 @@ public function chartGenerator($lebels ,$lebel, $data,$color){
             ]
         ];
         return $amountAnalysisMonthly;
+    }
+
+
+
+
+
+
+    public function cash_calculation(Request $request){
+        return view('cash.index');
     }
 
 

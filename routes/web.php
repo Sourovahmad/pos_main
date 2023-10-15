@@ -25,6 +25,7 @@ use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\OpdSaleController;
 use App\Http\Controllers\PosSettingController;
 use App\Http\Controllers\QuotaionController;
 use App\Http\Controllers\ReturnFromCustomerController;
@@ -70,6 +71,7 @@ Route::get('excel-import', [ProductController::class,"excelImport"])->name('prod
 Route::post('excel-import-store', [ProductController::class,"excelImport_store"])->name('products.excelImportStore');
 Route::get('categorized-product', [ProductController::class, 'categorized_product'])->name('categorized_product');
 Route::resource('orders', OrderController::class);
+Route::resource('opdSales', OpdSaleController::class);
 Route::resource('purchases', PurchaseController::class);
 Route::get("purchase-order-request",[PurchaseController::class, "orderRequest"])->name('purchases.orderRequest');
 Route::resource('brands', BrandController::class);
@@ -144,6 +146,12 @@ Route::get('setting-decode', [SettingController::class, "decodeString"]);
 Route::get('quotation-index', [QuotaionController::class, "index"])->name('quotation-index');
 Route::get('quotation-create', [QuotaionController::class, "create"])->name('quotation-create');
 Route::post('quotation-generate', [QuotaionController::class, "store"])->name('quotation-generate');
+
+
+
+// cash box calculation
+Route::get('cash-calculation', [AnalysisController::class, "cash_calculation"])->name('cash-calculation');
+
 
 
 

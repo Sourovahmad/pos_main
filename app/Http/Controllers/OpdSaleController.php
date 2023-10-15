@@ -65,13 +65,16 @@ class OpdSaleController extends Controller
         $order->save();
         if( auth()->user()->hasPermissionTo('Allow Customer Due')){
             
-            $order->due=$request->order['due'];
+            if(isset($order['customer_id'])){
+                $order->due=$request->order['due'];
             
-            $customer = $order->customer;
-            $customer->due = $order->due;
-            $customer->save();
-            
-            $this->onlineSync('customer','update',$customer->id);
+                $customer = $order->customer;
+                $customer->due = $order->due;
+                $customer->save();
+                $this->onlineSync('customer','update',$customer->id);
+            }
+
+     
         }
         else{
             $order->discount += $request->order['due'];
@@ -82,7 +85,7 @@ class OpdSaleController extends Controller
 
 
         // invoice generator
-        $logo = EscposImage::load("{{asset('images/logo.png')}}", false);
+        $logo = EscposImage::load(public_path("image/logo.png"), false);
         $connector = new WindowsPrintConnector("yourPrintername");
         $printer = new Printer($connector);
         $settings = setting::first();
@@ -154,13 +157,7 @@ class OpdSaleController extends Controller
             }
             $databaseProduct->save();
 
-             $this->onlineSync('orderDetail','create',$orderDetail->id);
-             $this->onlineSync('Product','update',$databaseProduct->id);
-
-            // product Analysis start
-            $this->productAnalysis($orderDetail);
-            // product Analysis end
-
+          
 
             // product info for invoice 
 
@@ -180,47 +177,13 @@ class OpdSaleController extends Controller
 
         Log::info("total sell profit for this order", ["profit" => $profit]);
 
-
-        $this->onlineSync('order','create',$order->id);
-
-        
-
-
-        // calculation Analysis start
-        $this->calculationAnalysis($order);
-        // calculation Analysis end
-
-
-        // employee Analysis start
-        $this->employeeAnalysis($profit);
-        // employee Analysis end
-
-        // sell Analysis start
-        $this->sellAnalysis($order,$productCount);
-        // sell Analysis end
-
-
-
         $numberToWords = new NumberToWords();
         $numberTransformer = $numberToWords->getNumberTransformer('en');
         $totalNumberInWord =  $numberTransformer->toWords($order->total);
 
 
-
-        
-        $htmlData = [
-            "products" => $requestProducts,
-            "purchase" => $order,
-            'totalNumberInWord' => $totalNumberInWord
-        ];
-
-
-
-
         // print using thermal printer
         // generate invoice
-
-
 
 
         $printer -> text("-----------------------------\n");
@@ -242,10 +205,6 @@ class OpdSaleController extends Controller
 
         $printer->cut();
         $printer -> close();
-
-
-
-
 
   
         return response()->json([

@@ -210,6 +210,55 @@
 
                 </div>
 
+
+
+
+                <div class="row m-md-4 m-0">
+
+
+                    <div class="form-group col-12 col-md-3">
+                        <label for="auto_printing"> {{ __('translate.Allow Invoice Auto Printing') }} </label>
+                    </div>
+
+
+                    <div class="form-group col-12 col-md-3">
+                        <select class="form-control" value="" name="auto_printing" id="auto_printing">
+                            <option selected disabled value="">Select</option>
+
+
+                          @if($settings->auto_printing == 'yes')
+                            <option selected value="yes"> Yes</option>
+                            <option value="no"> No</option>
+
+                        @else
+                        <option  value="yes"> Yes</option>
+                        <option selected value="no"> No</option>
+                         @endif
+
+                          
+
+                        </select>
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
                 <div class="row m-md-4 m-0">
 
 

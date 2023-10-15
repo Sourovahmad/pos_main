@@ -101,6 +101,8 @@ class PosSettingController extends Controller
         $posSetting->language = $request->language;
         $posSetting->customer_due = $request->customer_due;
         $posSetting->supplier_due = $request->supplier_due;
+        $posSetting->auto_printing = $request->auto_printing;
+
     
         if(!is_null($request->logo)){
 

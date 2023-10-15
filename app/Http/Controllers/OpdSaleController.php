@@ -162,7 +162,7 @@ class OpdSaleController extends Controller
             // product info for invoice 
 
             $prodcutInfoText = $databaseProduct->name . " " .$product['price'] . " " .$product['quantity'] . "\n";
-            $printer -> text($$prodcutInfoText);
+            $printer -> text($prodcutInfoText);
 
 
 

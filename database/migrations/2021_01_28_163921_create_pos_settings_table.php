@@ -23,6 +23,7 @@ class CreatePosSettingsTable extends Migration
             $table->string('customer_due')->nullable();
             $table->string('supplier_due')->nullable();
             $table->string('logo')->nullable();
+            $table->string('auto_printing')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

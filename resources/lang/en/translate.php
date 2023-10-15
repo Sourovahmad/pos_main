@@ -512,7 +512,7 @@ return[
 'Quotation Create'=>'Quotation Create',
 'Vat & tax'=>'Vat & tax',
 'OPD SALE'=>'OPD SALE',
-''=>'',
+'Allow Invoice Auto Printing'=>'Allow Invoice Auto Printin',
 ''=>'',
 ''=>'',
 ''=>'',

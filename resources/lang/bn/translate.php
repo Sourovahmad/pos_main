@@ -508,7 +508,7 @@ return[
 'Vat & tax'=>'ভ্যট ও টেক্স',
 'OPD SALE'=>'ও পি ডি সেল', 
 'Allow Invoice Auto Printing'=>'ইনভয়েস আটো প্রিন্ট',
-''=>'',
+'Printer Name'=>'প্রিন্টার এর নাম',
 ''=>'',
 ''=>'',
 ''=>'',

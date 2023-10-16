@@ -24,6 +24,7 @@ class CreatePosSettingsTable extends Migration
             $table->string('supplier_due')->nullable();
             $table->string('logo')->nullable();
             $table->string('auto_printing')->nullable();
+            $table->string('printer_name')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

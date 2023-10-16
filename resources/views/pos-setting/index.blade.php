@@ -244,7 +244,17 @@
 
 
 
+                    
 
+                    <div class="form-group col-12 col-md-3">
+                        <label for="printer_name_input"> {{ __('translate.Printer Name') }} (exactly same as device printer name) </label>
+                    </div>
+
+
+                    <div class="form-group col-12 col-md-3">
+                        <input type="text" name="printer_name" class="form-control" id="printer_name_input"
+                            value="{{ $settings->printer_name }}">
+                    </div>
 
 
                 </div>
@@ -363,6 +373,25 @@ aria-hidden="true">
 </div>
 </div>
 @endcan
+
+
+
+
+
+<script>
+    window.onload = function(){
+       const selectorAutoPrinting = document.getElementById("auto_printing");
+       selectorAutoPrinting.addEventListener("change", function(){
+        const selectorValue = selectorAutoPrinting.value;
+        if(selectorValue == "yes"){
+            document.getElementById("printer_name_input").setAttribute("required", true);
+        }else{
+            document.getElementById("printer_name_input").removeAttribute("required");
+        }
+       });
+
+    }
+</script>
 
 
 

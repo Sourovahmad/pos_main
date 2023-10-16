@@ -839,6 +839,7 @@ $(document).ready(function () {
             success: function (data) {
                 $("#pageloader").hide();
                 alert("OPD SALE SUCCESS");
+                location.reload(true);
                
             },
             error: function (data) {

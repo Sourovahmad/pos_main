@@ -513,7 +513,7 @@ return[
 'Vat & tax'=>'Vat & tax',
 'OPD SALE'=>'OPD SALE',
 'Allow Invoice Auto Printing'=>'Allow Invoice Auto Printin',
-''=>'',
+'Printer Name'=>'Printer Name',
 ''=>'',
 ''=>'',
 ''=>'',

@@ -24,7 +24,7 @@ class PosSettingSeeder extends Seeder
                 'customer_due' => 'yes',
                 'supplier_due' => 'yes',
                 'logo' => 'image/techbot_logo.png',
-                'auto_printing' => 'yes',
+                'auto_printing' => 'no',
             ],
          
         ]);

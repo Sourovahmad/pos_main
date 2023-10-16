@@ -50,6 +50,8 @@ class OpdSaleController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $order = new opdSale;
         $order->user_id= Auth::user()->id;   //auth must be added here
         $order->customer_id=$request->order['customer_id'];
@@ -83,20 +85,19 @@ class OpdSaleController extends Controller
 
 
 
+        $currentSettings = setting::first();
 
+
+        if($currentSettings->auto_printing == "yes"){
         // invoice generator
         $logo = EscposImage::load(public_path("image/logo.png"), false);
-        $connector = new WindowsPrintConnector("yourPrintername");
+        $connector = new WindowsPrintConnector($currentSettings->printer_name);
         $printer = new Printer($connector);
         $settings = setting::first();
 
             /* Print top logo */
         $printer -> setJustification(Printer::JUSTIFY_CENTER);
         $printer -> graphics($logo);
-
-
-
-
 
 
         /* Name of shop */
@@ -125,6 +126,8 @@ class OpdSaleController extends Controller
 
 
         $printer -> text("Name  Price Quantity\n");
+        }
+
                 
         $cost=0;
         $profit=0;
@@ -160,16 +163,19 @@ class OpdSaleController extends Controller
           
 
             // product info for invoice 
-
-            $prodcutInfoText = $databaseProduct->name . " " .$product['price'] . " " .$product['quantity'] . "\n";
-            $printer -> text($prodcutInfoText);
+            if($currentSettings->auto_printing == "yes"){
+                $prodcutInfoText = $databaseProduct->name . " " .$product['price'] . " " .$product['quantity'] . "\n";
+                $printer -> text($prodcutInfoText);
+            }
 
 
 
         }
 
-        $printer -> text("-----------------------------\n");
-        $printer->feed();
+        if($currentSettings->auto_printing == "yes"){
+            $printer -> text("-----------------------------\n");
+            $printer->feed();
+        }
 
         $order->cost =$cost;
         $order->profit =$profit;
@@ -185,30 +191,31 @@ class OpdSaleController extends Controller
         // print using thermal printer
         // generate invoice
 
-
-        $printer -> text("-----------------------------\n");
-        $printer -> text("Total Price  : ".$order->total . "\n");
-        $printer -> text("Total Price in words  : ".$totalNumberInWord . "\n");
-        $printer -> text("Thank You\n");
-
-
-
-
-        $printer -> setJustification(Printer::JUSTIFY_CENTER);
-        $printer -> barcode($order->id, Printer::BARCODE_CODE39);
-        $printer -> feed();
-        $printer -> text($order->id);
-        $printer -> feed(1);
-        $printer -> setJustification(Printer::JUSTIFY_LEFT);
+        if($currentSettings->auto_printing == "yes"){
+            $printer -> text("-----------------------------\n");
+            $printer -> text("Total Price  : ".$order->total . "\n");
+            $printer -> text("Total Price in words  : ".$totalNumberInWord . "\n");
+            $printer -> text("Thank You\n");
 
 
 
-        $printer->cut();
-        $printer -> close();
+
+            $printer -> setJustification(Printer::JUSTIFY_CENTER);
+            $printer -> barcode($order->id, Printer::BARCODE_CODE39);
+            $printer -> feed();
+            $printer -> text($order->id);
+            $printer -> feed(1);
+            $printer -> setJustification(Printer::JUSTIFY_LEFT);
+
+
+
+            $printer->cut();
+            $printer -> close();
+
+        }
 
   
         return response()->json([
-            "html" => $html,
             "purchse" => $order
         ]);
     }

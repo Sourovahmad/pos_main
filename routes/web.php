@@ -32,6 +32,7 @@ use App\Http\Controllers\ReturnFromCustomerController;
 
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ReturnToSupplierController;
+use App\Http\Controllers\statementController;
 use App\Http\Controllers\StockAlertController;
 use App\Http\Controllers\SupplierDuePayController;
 use App\Http\Controllers\UserController;
@@ -151,8 +152,8 @@ Route::post('quotation-generate', [QuotaionController::class, "store"])->name('q
 
 // cash box calculation
 Route::get('cash-calculation', [AnalysisController::class, "cash_calculation"])->name('cash-calculation');
-
-
+Route::get('sell-statement', [statementController::class, "sellStatement"])->name("statement.sell");
+Route::get('purchase-statement', [statementController::class, "purchaseStatement"])->name("statement.purchase");
 
 
 

@@ -92,6 +92,32 @@
     @endif
 
 
+        
+
+
+
+    @can('Super Admin')
+    <hr class="sidebar-divider m-1 p-0 ">
+
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseStatement" aria-expanded="true" aria-controls="collapseStatement">
+            
+            <i class="fas fa-envelope-square"></i>
+
+            <span>{{__('translate.Statements')}}</span>
+        </a>
+        <div id="collapseStatement" class="collapse" aria-labelledby="headingSell" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('statement.sell',['user' => 'all']) }}">{{__('translate.sell statement')}} </a>
+                <a class="collapse-item" href="{{ route('statement.purchase') }}">{{__('translate.purchase statement')}} </a>
+            </div>
+        </div>
+    </li>
+
+    @endcan
+
 
 
     @if( $GLOBALS['CurrentUser']->can('Product Page'))

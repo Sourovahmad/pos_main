@@ -100,6 +100,10 @@
     <hr class="sidebar-divider m-1 p-0 ">
 
 
+    @php
+        $startDate =\Carbon\Carbon::today()->startOfDay();
+        $endDate = \Carbon\Carbon::today()->endOfDay();
+    @endphp
 
     <li class="nav-item">
         <a class="nav-link collapsed  p-3 " href="#" data-toggle="collapse" data-target="#collapseStatement" aria-expanded="true" aria-controls="collapseStatement">
@@ -110,8 +114,9 @@
         </a>
         <div id="collapseStatement" class="collapse" aria-labelledby="headingSell" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('statement.sell',['user' => 'all']) }}">{{__('translate.sell statement')}} </a>
-                <a class="collapse-item" href="{{ route('statement.purchase') }}">{{__('translate.purchase statement')}} </a>
+                <a class="collapse-item" href="{{ url('sell-statement') . '?user=all&sell_type=all&start_date=' . $startDate . '&end_date=' . $endDate }}">{{ __('translate.sell statement') }} </a>
+                <a class="collapse-item" href="{{ url('purchase-statement') . '?user=all&start_date=' . $startDate . '&end_date=' . $endDate }}">{{ __('translate.purchase statement') }} </a>
+
             </div>
         </div>
     </li>

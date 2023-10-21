@@ -53,11 +53,16 @@
         <div class="card-header py-3 bg-abasas-dark">
             <nav class="navbar navbar-dark ">
                 
+                @php
+                           
+                $startDateModified =\Carbon\Carbon:: parse($request->start_date)->format('Y-m-d'); ;
+                $endDateModified = \Carbon\Carbon:: parse($request->end_date)->format('Y-m-d'); ;
+            @endphp
                 
                 <span>
 
-                    <h4> From : <b> {{ $request->start_date }} </b> </h4> <br>
-                    <h4>To: <b>  {{ $request->end_date }} </b> </h4>
+                    <h4> From : <b> {{ $startDateModified }} </b> </h4> <br>
+                    <h4>To: <b>  {{   $endDateModified }} </b> </h4>
 
                 </span>
                    
@@ -90,6 +95,9 @@
     
                       <tbody>
 
+                        @php
+                            $totalAmount = 0;
+                        @endphp
                         @foreach ($statements as $item)
                         
 
@@ -114,14 +122,46 @@
 
                             <td class="  word-break tax"> {{ $item->created_at}}</td>
                         
-
+                            @php
+                                $totalAmount += $item->total;
+                            @endphp
 
                         </tr>
                         @endforeach 
 
+
+
+                     
+
+
+
                       
 
                     </tbody> 
+
+                    <tr class="data-row" style="background-color: navy;color:white">
+                            
+                        <td class="  word-break id "> </td>
+     
+                        <td class="  word-break name "> </td>
+                    
+                        
+                          <td class="  word-break category_id"> Total Amount </td>
+                      
+                     
+                  
+                        <td class="  word-break price"> {{ $totalAmount}}</td>
+                 
+
+                        
+                        <td class="  word-break tax"> </td>
+
+                        <td class="  word-break tax"> </td>
+                    
+                    
+
+                    </tr>
+
 
                  
                 </table>
@@ -138,7 +178,6 @@
     </div>
 
 </div>
-
 
 
 
@@ -172,15 +211,18 @@
                         <form action="{{ route("statement.sell") }}" method="GET"> 
                             @csrf
 
+
+
+
                     <div class="mb-3">  
                         <label class="form-label" for="start_date">Start Date:</label>
-                        <input  class="form-control" value="{{ $request->start_date }}" type="date" name="start_date" required> 
+                        <input  class="form-control" value="{{ $startDateModified }}" type="date" name="start_date" required> 
 
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label" for="end_date">End Date:</label>
-                        <input class="form-control" value="{{ $request->end_date }}" type="date" name="end_date" required>
+                        <input class="form-control" value="{{ $endDateModified }}" type="date" name="end_date" required>
 
                     </div>
 
@@ -207,6 +249,32 @@
 
 
                     </div>
+
+
+
+                    <div class="mb-3">
+                        <label for="sellType"> {{ __('translate.Sell Type') }}  </label>
+             
+
+ 
+                        <select  class="form-control" value="" name="sell_type" id="sellType">
+
+                            <option @if($request->sell_type == "all")
+                                selected
+                            @endif value="all"> All </option>
+                            <option @if($request->sell_type == "opd")
+                                selected
+                            @endif value="opd"> OPD </option>
+                            <option @if($request->sell_type == "ipd")
+                                selected
+                            @endif value="ipd"> IPD </option>
+
+
+                        </select>
+
+
+                    </div>
+    
     
                       
               
@@ -251,14 +319,41 @@
 
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function(){   
+
+        const totalExpense = @json($totalAmount);
         
         $('#productTable').DataTable({   
             paging: false,
             dom: 'lBfrtip',
             buttons: [
-                'csv', 'excel' , 'pdf' , 'print'
-            ]
+                {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        customize: function(doc) {
+                            // Append total row count to the end of the PDF document
+                            doc.content.push({ text: 'Total Amount: ' + totalExpense, margin: [0, 0, 0, 12] });
+                        }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    customize: function(csv) {
+                        return csv + '\n"Total Amount: ' + totalExpense + '"';
+                    }
+                },
+
+                {
+                    extend: 'excel',
+                    text: 'Export to Excel',
+                    customize: function(xlsx) {
+                        var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                        
+                        // Append a new row with the total count of rows in the table
+                        $('row:last', sheet).after('<row><c t="inlineStr"><is><t>Total Amount: ' + totalExpense + '</t></is></c></row>');
+                    }
+                }
+             ]
         });
         
     })

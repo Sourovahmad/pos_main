@@ -129,6 +129,10 @@ class StockAlertController extends Controller
 
 
    public function returnStockEntryPage() {
+
+
+
+
         $roles = Role::all();
         $paymentSystems = paymentSystem::all();
         return view('product.stockentry.index',compact('paymentSystems','roles'));
@@ -187,6 +191,22 @@ class StockAlertController extends Controller
                 }
 
                 $purchase->save();
+
+
+
+
+                // generate invoice
+
+                
+
+
+
+
+
+
+
+
+
 
                 $message = "Stock inserted successfully";
                 return response()->json([

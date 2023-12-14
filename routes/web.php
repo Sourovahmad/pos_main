@@ -25,6 +25,7 @@ use App\Http\Controllers\ExpenseMonthlyController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\OpdSaleController;
 use App\Http\Controllers\PosSettingController;
 use App\Http\Controllers\QuotaionController;
@@ -177,7 +178,7 @@ Route::get('customer_view_api', [CustomerController::class, 'ApiShow']);
 Route::get('customer_check_api', [CustomerController::class, 'apiCustomerCheck']);
 // Route::get('customers_due_api', [CustomerController::class, 'customersDue']);
 
-
+Route::post('generate-order-invoice', [invoiceController::class, "generateOrder"])->name('generate-order-invoice');
   
 
 
@@ -197,6 +198,10 @@ Route::get('permission-test',function(){
 
     return view('permissions.test');
 });
+
+
+
+route::view('invoice', 'invoice.design');
 
 ///// testing 
 Route::get("chart", function () {

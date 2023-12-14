@@ -62,7 +62,6 @@ class OrderController extends Controller
             'items' => $orders,
             'page_name' => 'Order',
         ];
-
         return view('product.order.index',compact('dataArray','month','roles'));
     }
   

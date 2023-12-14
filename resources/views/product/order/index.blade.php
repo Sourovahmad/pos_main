@@ -158,7 +158,7 @@
                              @can('Order View')
                             <td class="align-middle"> 
                                 
-                                <a href=""><button type="button" class="btn btn-primary btn-sm" title="View Order" id="order-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button></a>
+                                 <button type="button" data-order-id="{{ $itemId }}"  class="btn btn-primary btn-sm invoiceViewButton" title="View Order" id="order-view-button" > <i class="fa fa-eye" aria-hidden="false"> </i></button>
                                 
 
                             </td>
@@ -431,6 +431,8 @@
 <script>
     $(document).ready(function () {
 
+
+
         $('#orderTable').DataTable({
             dom: 'lBfrtip',
             buttons: [
@@ -508,6 +510,20 @@ error: function (data) {
 
 
     })
+
+    // invoice genrator
+
+    $(".invoiceViewButton").click(function(){
+       const purchaseId =  $(this).attr('data-order-id').trim();
+       
+        
+
+
+    });
+
+
+
+
 
 </script>
 

@@ -16,4 +16,11 @@ class invoiceController extends Controller
             "data" => $html
         ]);
     }
+
+
+    public function generateOrder(Request $request){
+
+        $orderId = $request->order_id;
+        
+    }
 }

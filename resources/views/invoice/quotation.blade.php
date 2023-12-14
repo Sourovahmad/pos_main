@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Digital Technology (purchase Order)</title>
+  <title> R.M. Medicine & Medi Science (purchase Order)</title>
   <style>
+    body {
+    font-family: Arial, sans-serif; /* Use a basic, readable font */
+    font: size 10px;
+  }
     .receipt {
     width: 600px;
     margin: 0 auto;
@@ -69,11 +73,7 @@
     font-weight: bold;
     color: #444;
   }
-  
-  body {
-    font-family: Arial, sans-serif; /* Use a basic, readable font */
-  }
-  
+   
   h1, h2 {
     color: #333; /* Darker color for headers */
   }
@@ -105,17 +105,40 @@
   .order-to, .order-info {
     width: 48%; /* Almost half the container, leaving a gap in the center */
   }
-  
+  .ourwebistInfo:{
+    margin-bottom: 100px;
+  }
+
+
+  .signature-container {
+    display: inline-block;
+    text-align: right;
+    margin-left: auto;
+    float: right;
+}
+
+.signature-container hr {
+    width: auto;
+    border: 0;
+    height: 1px;
+    background-color: #000;
+    margin-bottom: 10px;
+}
+
+
+
+
   </style>
 </head>
 <body>
   <div class="receipt">
     <div class="logo"><img src="image/logo.png" height="50px" alt="Logo"></div>
     <div class="header">
-      <h2>Digital Technology BD</h2>
-      <span>Computer sales & Servicing solution provider</span>
-      <p>Dishari-106, Hawapara, Sylhet</p>
-      <p> Mobile: 01891-471677</p>    
+     <h2>Medicine & Medi Science</h2>
+      <p> <b>Proprietor: Md. Zahangir Alam</b></p>
+      <p>Kazitula Bazar, Sylhet</p>
+      <p> Whatsapp no: +8801748433393</p>
+      <p> Email: zahangiralam3393@gmail.com</p>       
     </div>
 
     <div class="body">
@@ -136,12 +159,12 @@
         </div>
       <table class="table">
         <thead>
-          <tr>
+          <tr style="height: 49px">
             <th>SI.No</th>
             <th>ProductName</th>
             <th>Quantity</th>
             <th>Rate</th>
-            <th>Discount</th>
+            <th>Discount (%)</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -175,7 +198,7 @@
               $totalAmountWithDiscount = intval($data['purchase']->total) + intval($data['purchase']->discount);
             @endphp
 
-            <td style="border: none;"><b> {{ $totalAmountWithDiscount }}  </b> </td>
+            <td style="border: none;"><b> {{ $totalAmountWithDiscount }}.00  </b> </td>
 
 
             
@@ -191,8 +214,11 @@
 
 
 
-            <td style="border: none;"><b> {{ $data['purchase']->discount }}  </b> </td>
+            <td style="border: none;"><b> {{ $data['purchase']->discount }}.00  </b> </td>
           </tr>
+
+
+          
 
 
 
@@ -205,7 +231,7 @@
             <td style="border: none;"></td>
             <td style="border: none;"></td>
             <td style="border: none;"> <b>Grand Total </b> </td>
-            <td style="border: none;"><b> {{ $data['purchase']->total }}  </b> </td>
+            <td style="border: none;"><b> {{ $data['purchase']->total }}.00  </b> </td>
           </tr>
 
 
@@ -215,7 +241,7 @@
             <td style="border: none;"></td>
             <td style="border: none;"></td>
             <td style="border: none;"> <b>Due </b> </td>
-            <td style="border: none;"><b> {{ $data['purchase']->due }}  </b> </td>
+            <td style="border: none;"><b> {{ $data['purchase']->due }}.00  </b> </td>
 
 
           </tr>
@@ -242,17 +268,39 @@
     <div class="footer">
       <div class="approval-section">
         
-        <div>
+        <div style="text-align: left; float:left">
           <p>Created By:</p>
 
-          <p>{{ auth()->user()->name }}</p>
+          <p>sourov
          
         </div>
+
+
+        <div class="signature-container" style="text-align: right; margin-top:28px">
+            <!-- Horizontal line -->
+            <hr>
+    
+            <!-- Authorized signature section -->
+            <div class="authorized-signature-section">
+                <span>
+                    Authorize signature
+                </span>
+            </div>
+        </div>
+    
+
+
       </div>
 
-      <div class="ourwebistInfo"> 
+
+
+
+    
+    <div class="ourwebistInfo"> 
         <p style="font-size:12px; text-align: center;">Developed by: AS Coroporation (+8801723500532, +8801729867026) </p>
+    
       </div>
+
      
     </div>
   </div>

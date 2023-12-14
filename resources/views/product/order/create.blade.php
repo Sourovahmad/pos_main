@@ -429,7 +429,7 @@
 
 <!-- More Discount Type Modal -->
 
-<div class="modal fade   " id="moreDiscountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="moreDiscountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered  border-none " role="document">
         <div class="modal-content bg-abasas-dark">
@@ -635,6 +635,37 @@
         </div>
     </div>
 </div>
+
+
+<!-- Attachment Modal -->
+<div class="modal fade" id="printInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="edit-modal-label ">Invoice </h5>
+                <button type="button" class="close invoiceModalCloseButton" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+              
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary invoiceModalCloseButton" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="printInvoiceButton">Print Invoice</button>
+              </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
 <!-- /Attachment Modal -->
 <iframe id="orderPrintFrame" style="visibility:hidden; height:0; width:0;"></iframe>
 

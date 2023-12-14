@@ -843,30 +843,17 @@ $(document).ready(function () {
                 order_details: purchaseTableData,
             },
             success: function (data) {
+
+
+
                 $("#pageloader").hide();
 
-                // Get the iframe and its document
-                let printFrame = document.getElementById("orderPrintFrame");
-                let printDocument =
-                    printFrame.contentDocument ||
-                    printFrame.contentWindow.document;
+                $("#modal-body-content").html(data.html.html);
+                $("#printInvoiceModal").modal();
 
-                // Insert the invoice content
-                printDocument.open();
-                printDocument.write(data.html.html); // the server returns the invoice HTML content
-                printDocument.close();
 
-                // Before printing, set a long timeout
-                setTimeout(function () {
-                    // Inside the timeout, use requestAnimationFrame to detect a window redraw
-                    requestAnimationFrame(function () {
-                        // Reload the page when the callback is triggered
-                        location.reload(true);
-                    });
-                }, 100);
 
-                // Now trigger the print dialog
-                printFrame.contentWindow.print();
+
             },
             error: function (data) {
                 $("#pageloader").hide();
@@ -990,6 +977,21 @@ $(document).ready(function () {
         $("#productSuggession").html("");
     });
 
+
+        $("#printInvoiceButton").on("click", function(){
+            var printContent = $("#modal-body-content").html();
+            var originalContent = $('body').html();
+    
+            $('body').html(printContent);
+            window.print();
+            $('body').html(originalContent);
+        });
+
+
+
+        $(".invoiceModalCloseButton").on("click", function(){
+            location.reload();
+        });
 
 
     

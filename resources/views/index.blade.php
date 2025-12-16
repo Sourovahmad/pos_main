@@ -355,6 +355,24 @@
                       @endif
                     @endif
                   </div>
+                  <hr>
+                  <div class="mb-2">
+                    <strong>Pricing Plans:</strong>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 mb-2">
+                      <div class="border rounded p-2 text-center">
+                        <small class="text-muted">Monthly</small>
+                        <div class="font-weight-bold text-primary">${{ number_format($developerInfo->monthly_price ?? 39, 2) }}</div>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-2">
+                      <div class="border rounded p-2 text-center">
+                        <small class="text-muted">One-Time</small>
+                        <div class="font-weight-bold text-success">${{ number_format($developerInfo->one_time_price ?? 399, 2) }}</div>
+                      </div>
+                    </div>
+                  </div>
                 @else
                   <h4>SA CORPORATION</h4>
                   <div> <i class="fab fa-whatsapp fa-sm font-weight-bold h5"></i> <span class="text-dark" style='font-size:18px'>+8801723500532, +8801729867026   </span>    </div>

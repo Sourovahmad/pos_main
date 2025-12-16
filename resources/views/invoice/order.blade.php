@@ -276,7 +276,7 @@
 
     
     <div class="ourwebistInfo"> 
-        <p style="font-size:12px; text-align: center;">Developed by: AS Coroporation (+8801723500532, +8801729867026) </p>
+        <p style="font-size:12px; text-align: center;">Developed by: OrBiTax International </p>
     
       </div>
 

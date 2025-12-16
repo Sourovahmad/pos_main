@@ -17,6 +17,8 @@ class DeveloperInfo extends Model
         'address',
         'license_key',
         'demo_valid_till',
+        'monthly_price',
+        'one_time_price',
     ];
     
     protected $casts = [

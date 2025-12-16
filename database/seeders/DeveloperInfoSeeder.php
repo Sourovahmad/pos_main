@@ -22,12 +22,14 @@ class DeveloperInfoSeeder extends Seeder
         $demoValidTill = Carbon::now()->addMonth();
         
         if ($developerInfo) {
-            // Record exists - preserve the existing license key, only update demo_valid_till
+            // Record exists - preserve the existing license key, only update other fields
             $developerInfo->update([
                 'company_name' => 'OrbiTax Corporation Limited',
                 'demo_owner_account' => 'Sourov Ahmad',
                 'address' => 'Via Carlo della rocca 36',
                 'demo_valid_till' => $demoValidTill,
+                'monthly_price' => 39.00,
+                'one_time_price' => 399.00,
                 // license_key is not updated - it remains unchanged
             ]);
         } else {
@@ -41,6 +43,8 @@ class DeveloperInfoSeeder extends Seeder
                 'address' => 'Via Carlo della rocca 36',
                 'license_key' => $licenseKey,
                 'demo_valid_till' => $demoValidTill,
+                'monthly_price' => 39.00,
+                'one_time_price' => 399.00,
             ]);
         }
     }

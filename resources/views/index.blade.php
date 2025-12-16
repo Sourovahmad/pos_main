@@ -329,16 +329,40 @@
                 <h6 class="m-0 font-weight-bold ">Developed By</h6>
               </div>
               <div class="card-body text-center">
-                {{-- <img src="{{asset('image/logo.png')}}" height="100px" alt="techbot Logo"> --}}
-                <h4>SA CORPORATION</h4>
-                <div> <i class="fab fa-whatsapp fa-sm font-weight-bold h5"></i> <span class="text-dark" style='font-size:18px'>+8801723500532, +8801729867026   </span>    </div>
+                @if($developerInfo)
+                  <h4>{{ $developerInfo->company_name }}</h4>
+                  <div class="mb-2">
+                    <strong>Demo Owner Account:</strong> {{ $developerInfo->demo_owner_account }}
+                  </div>
+                  <div class="mb-2">
+                    <i class="fas fa-map-marker-alt h5 mr-2"></i>
+                    <span class="text-dark">{{ $developerInfo->address }}</span>
+                  </div>
+                  <div class="mb-2">
+                    <strong>License Key:</strong> 
+                    <span class="text-dark font-weight-bold">{{ $developerInfo->license_key }}</span>
+                  </div>
+                  <div class="mb-2">
+                    <strong>Demo Valid Till:</strong> 
+                    <span class="text-dark">{{ $developerInfo->demo_valid_till->format('Y-m-d') }}</span>
+                    @if($daysLeft !== null)
+                      @if($daysLeft > 0)
+                        <span class="badge badge-success ml-2">{{ $daysLeft }} days left</span>
+                      @elseif($daysLeft == 0)
+                        <span class="badge badge-warning ml-2">Expires today</span>
+                      @else
+                        <span class="badge badge-danger ml-2">Expired {{ abs($daysLeft) }} days ago</span>
+                      @endif
+                    @endif
+                  </div>
+                @else
+                  <h4>SA CORPORATION</h4>
+                  <div> <i class="fab fa-whatsapp fa-sm font-weight-bold h5"></i> <span class="text-dark" style='font-size:18px'>+8801723500532, +8801729867026   </span>    </div>
 
-                <div class="mailIcons d-flex justify-content-center" >  <i class="far fa-envelope h5 mr-2"></i>    <a href="mailto:ashfakuddin43@gmail.com" target="_blank"> <div class="text-dark font-weight-bold ">ashfakuddin43@gmail.com</div> </a></div>
+                  <div class="mailIcons d-flex justify-content-center" >  <i class="far fa-envelope h5 mr-2"></i>    <a href="mailto:ashfakuddin43@gmail.com" target="_blank"> <div class="text-dark font-weight-bold ">ashfakuddin43@gmail.com</div> </a></div>
 
-
-                 <div class="mailIcons d-flex justify-content-center" >  <i class="far fa-envelope h5 mr-2"></i>    <a href="mailto:sourov.okk@gmail.com" target="_blank"> <div class="text-dark font-weight-bold ">sourov.okk@gmail.com</div> </a></div>
-
-
+                  <div class="mailIcons d-flex justify-content-center" >  <i class="far fa-envelope h5 mr-2"></i>    <a href="mailto:sourov.okk@gmail.com" target="_blank"> <div class="text-dark font-weight-bold ">sourov.okk@gmail.com</div> </a></div>
+                @endif
                  
               </div>
             </div>

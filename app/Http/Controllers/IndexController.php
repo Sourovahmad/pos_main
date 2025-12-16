@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\customer;
+use App\Models\DeveloperInfo;
 use App\Models\goal;
 use App\Models\order;
 use App\Models\Product;
@@ -67,8 +68,14 @@ class IndexController extends Controller
         $goal->monthly = $monthly  /  $goal->monthly  *100;
         $goal->yearly =  $yearly / $goal->yearly   *100;
        
+        // Get developer info
+        $developerInfo = DeveloperInfo::find(1);
+        $daysLeft = null;
+        if ($developerInfo && $developerInfo->demo_valid_till) {
+            $daysLeft = Carbon::now()->diffInDays($developerInfo->demo_valid_till, false);
+        }
 
-        return view('index',compact('customers','suppliers','orders','products','goal'));
+        return view('index',compact('customers','suppliers','orders','products','goal','developerInfo','daysLeft'));
     }
 
     /**
